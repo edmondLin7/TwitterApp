@@ -25,3 +25,23 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Current Progress
+
+Existing Components: 
+    - Tweet: Still looks slightly rough, and no profile pic comes from backend yet so the profile is only a placeholder
+    - Logo: Done
+    - Navbar: Visually complete but does not yet route
+    - MainContent (Home page content): Integrated with backend Tweet api possibly needs more styling
+    - Login-form: TODO
+        - Form with validation, verification, and integration with server
+    - Register-form: TODO
+        - Form with validation, verification, and integration with server
+    - Profile page: TODO
+        - Integrate backend
+        - Components other than tweets and page layout
+Needed Components/Additions:
+    - New Tweet functionality and presentation
+    - Tweet Reply functionality and presentation
+    
