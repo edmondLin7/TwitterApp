@@ -14,6 +14,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LogoutComponent } from './pages/logout/logout.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     NavbarComponent,
     LogoComponent,
     ProfileComponent,
+    LogoutComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,
