@@ -7,10 +7,10 @@
         <div class="col-9">
             <div class="row text-center">
                 <div class="col-6">
-                    <h5>{{ tweet!.user.loginId }}</h5>
+                    <h5 class="text-primary">{{ tweet!.user.loginId }}</h5>
                 </div>
                 <div class="col-6">
-                    <h5> {{ tweet!.timestamp | date }}</h5>
+                    <h6> {{ tweet!.timestamp | date:'medium' }}</h6>
                 </div>
             </div>
             <div class="row">

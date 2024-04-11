@@ -13,6 +13,7 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterFormComponent,
     NavbarComponent,
     LogoComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
