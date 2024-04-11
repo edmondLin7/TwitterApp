@@ -29,9 +29,10 @@ public class TweetService {
     }
 
     public Tweet postTweet(String username, Tweet tweet) {
+        System.out.println(username);
         User user = userRepository.findUserByLoginId(username)
                 // Should implement a custom exception
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("User not found" + username));
         tweet.setUser(user);
         tweet.setTimestamp(LocalDateTime.now());
         tweet.setLikeCount(0L);
