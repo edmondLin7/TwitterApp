@@ -1,12 +1,17 @@
-<div class="container tweet">
+<div class="tweet">
     <div class="row">
         <div class="col-3">
-            <!-- Avatar -->
+            <img src="assets/images/placeholder_profile.png" alt="No profile picture found"
+                    class=" profilePicture mb-2 mt-2">
         </div>
         <div class="col-9">
-            <div class="row">
-                <h4>{{ tweet!.user.loginId }}</h4>
-                <h4> {{ tweet!.timestamp | date }}</h4>
+            <div class="row text-center">
+                <div class="col-6">
+                    <h5>{{ tweet!.user.loginId }}</h5>
+                </div>
+                <div class="col-6">
+                    <h5> {{ tweet!.timestamp | date }}</h5>
+                </div>
             </div>
             <div class="row">
                 <p>{{ tweet!.tweetContent }}</p>
