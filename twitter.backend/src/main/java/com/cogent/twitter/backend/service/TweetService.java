@@ -34,6 +34,7 @@ public class TweetService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         tweet.setUser(user);
         tweet.setTimestamp(LocalDateTime.now());
+        tweet.setLikeCount(0L);
         return tweetRepository.save(tweet);
     }
 
