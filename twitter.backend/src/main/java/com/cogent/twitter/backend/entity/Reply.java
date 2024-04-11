@@ -28,4 +28,5 @@ public class Reply {
     private String tag;
 
     private LocalDateTime timestamp;
+    private Long likeCount;
 }
