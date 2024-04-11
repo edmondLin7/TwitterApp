@@ -4,7 +4,13 @@
             <!-- Avatar -->
         </div>
         <div class="col-9">
-            
+            <div class="row">
+                <h4>{{ tweet!.user.loginId }}</h4>
+                <h4> {{ tweet!.timestamp | date }}</h4>
+            </div>
+            <div class="row">
+                <p>{{ tweet!.tweetContent }}</p>
+            </div>
         </div>
     </div>
 </div>

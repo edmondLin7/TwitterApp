@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ITweet } from 'src/app/models/tweet.model';
 
 @Component({
   selector: 'app-tweet',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./tweet.component.css']
 })
 export class TweetComponent {
+  @Input() tweet!: ITweet;
 
+  constructor() {
+
+  }
 }

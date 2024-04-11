@@ -12,6 +12,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LogoComponent } from './components/logo/logo.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
