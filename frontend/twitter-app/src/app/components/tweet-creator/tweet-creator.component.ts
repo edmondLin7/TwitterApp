@@ -29,6 +29,7 @@ export class TweetCreatorComponent {
 
   public onTweetCreate() {
     // this.tweet.tweetContent = this.tweetData.get("tweetContent")!;
+    console.log(this.tweet)
     this.dataService.postTweet(this.tweet, localStorage.getItem("loginId")!).subscribe((response) => {
       console.log(response);
       console.log(localStorage.getItem("loginId"))

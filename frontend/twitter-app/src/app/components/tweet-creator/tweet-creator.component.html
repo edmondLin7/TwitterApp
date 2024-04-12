@@ -20,6 +20,16 @@
             <div class="text-warning  text-right small">
                 {{tweet.tweetContent.length}} / 144
             </div>
+            <div>
+                <label for="">Tag</label>
+                <input 
+                type="text"
+                maxlength="50"
+                class="form-control" 
+                name="tag"
+                [(ngModel)]="tweet.tag"
+                [class.is-invalid]="tweetData.touched && (tweet.tag!.length > 50) ">
+            </div>
             <div class="text-center m-2">
                 <input type="submit" class="btn btn-primary"> 
             </div>
