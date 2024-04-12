@@ -15,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AuthService {
     @Autowired
@@ -73,5 +75,19 @@ public class AuthService {
         response.setMessage("register successful");
         response.setUser(savedUser);
         return response;
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public User getUserByLoginId(String loginId) {
+        return userRepository.findUserByLoginId(loginId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
