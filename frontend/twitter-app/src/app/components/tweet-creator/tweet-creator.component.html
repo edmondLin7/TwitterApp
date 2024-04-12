@@ -17,6 +17,9 @@
                 [(ngModel)]="tweet.tweetContent"
                 [class.is-invalid]="(tweet.tweetContent.length===0 || tweet.tweetContent.length > 144) && tweetData.touched"></textarea>
             </div>
+            <div class="text-warning  text-right small">
+                {{tweet.tweetContent.length}} / 144
+            </div>
             <div class="text-center m-2">
                 <input type="submit" class="btn btn-primary"> 
             </div>

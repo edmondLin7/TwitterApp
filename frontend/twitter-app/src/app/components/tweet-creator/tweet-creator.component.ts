@@ -29,7 +29,10 @@ export class TweetCreatorComponent {
 
   public onTweetCreate() {
     // this.tweet.tweetContent = this.tweetData.get("tweetContent")!;
-    this.dataService.postTweet(this.tweet, localStorage.getItem("loginId")!)
+    this.dataService.postTweet(this.tweet, localStorage.getItem("loginId")!).subscribe((response) => {
+      console.log(response);
+      console.log(localStorage.getItem("loginId"))
+    })
     this.creatingTweet = false;
   }
 }
