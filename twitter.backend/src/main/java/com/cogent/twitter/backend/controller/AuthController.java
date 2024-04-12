@@ -1,5 +1,6 @@
 package com.cogent.twitter.backend.controller;
 
+import com.cogent.twitter.backend.entity.User;
 import com.cogent.twitter.backend.payload.LoginDto;
 import com.cogent.twitter.backend.payload.LoginResponse;
 import com.cogent.twitter.backend.payload.RegisterDto;
@@ -8,13 +9,12 @@ import com.cogent.twitter.backend.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.HTML;
+import java.util.List;
 
+@CrossOrigin
 @RequestMapping("api/v1.0/tweets")
 @RestController
 public class AuthController {
@@ -39,5 +39,23 @@ public class AuthController {
         }
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
 
+    }
+
+    @GetMapping("users/id/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+        User user = authService.getUserById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        var users = authService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("users/loginId/{loginId}")
+    public ResponseEntity<User> getuserByName(@PathVariable("loginId") String loginId){
+        User user = authService.getUserByLoginId(loginId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

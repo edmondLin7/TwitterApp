@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ITweet } from '../models/tweet.model';
 import { IReply } from '../models/reply.model';
+import { IUser } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class DataService {
   }
 
   getAllTweetsByUser(loginId: string): Observable<ITweet[]> {
-    return this.http.get<ITweet[]>(`${this.BASE_URL}/${loginId}`);
+    return this.http.get<ITweet[]>(`${this.BASE_URL}/user/${loginId}`);
   }
 
   postTweet(tweet: ITweet, loginId: string): Observable<ITweet> {
@@ -44,6 +45,18 @@ export class DataService {
 
   postReply(reply: IReply, loginId: string, tweetId: number): Observable<IReply> {
     return this.http.post<IReply>(`${this.BASE_URL}/${loginId}/replies/${tweetId}/add`, reply);
+  }
+
+  getUserById(userId: number): Observable<IUser> {
+    return this.http.get<IUser>(`${this.BASE_URL}/users/id/${userId}`)
+  }
+
+  getUserByName(loginId: string): Observable<IUser> {
+    return this.http.get<IUser>(`${this.BASE_URL}/users/loginId/${loginId}`)
+  }
+
+  getAllUsers(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(`${this.BASE_URL}/users`)
   }
   
 }

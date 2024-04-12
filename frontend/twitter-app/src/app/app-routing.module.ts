@@ -7,14 +7,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { HomeComponent } from './pages/home/home.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'home', component: MainContentComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'users', component: UserListComponent},
   { path: '**', component: ErrorPageComponent },
 
 ]

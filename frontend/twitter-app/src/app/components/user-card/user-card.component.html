@@ -1,4 +1,4 @@
-<div class="tweet">
+<div class="userCard">
     <div class="row">
         <div class="col-3">
             <img src="assets/images/placeholder_profile.png" alt="No profile picture found"
@@ -8,20 +8,15 @@
             <div class="row text-center">
                 <div class="col-6">
                     <h5 class="text-primary clickable" 
-                    (click)="routeToProfile(tweet.user!.userId!)">
-                        {{ tweet.user!.loginId }}
+                    (click)="routeToProfile(user!.userId!)">
+                        {{ user!.loginId }}
                     </h5>
                 </div>
-                <div class="col-6">
-                    <h6> {{ tweet.timestamp | date:'medium' }}</h6>
-                </div>
             </div>
             <div class="row">
-                <p>{{ tweet.tweetContent }}</p>
+                <p>{{ user.firstName }} {{user.lastName}}</p>
             </div>
-            <div class="row">
-                <p>{{ tweet.tag }}</p>
-            </div>
+
         </div>
     </div>
 </div>
