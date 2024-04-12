@@ -1,10 +1,7 @@
 package com.cogent.twitter.backend.controller;
 
 import com.cogent.twitter.backend.entity.User;
-import com.cogent.twitter.backend.payload.LoginDto;
-import com.cogent.twitter.backend.payload.LoginResponse;
-import com.cogent.twitter.backend.payload.RegisterDto;
-import com.cogent.twitter.backend.payload.RegisterResponse;
+import com.cogent.twitter.backend.payload.*;
 import com.cogent.twitter.backend.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +36,19 @@ public class AuthController {
         }
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
 
+    }
+
+    @PostMapping("/reset-password/{loginId}")
+    public ResponseEntity<PasswordResetResponse> resetPassword(
+            @PathVariable("loginId") String loginId,
+            @RequestBody String password) {
+        PasswordResetResponse response = authService.resetPassword(loginId, password);
+        if (response.isError()) {
+            return new ResponseEntity<>(
+                    response,
+                    HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("users/id/{id}")

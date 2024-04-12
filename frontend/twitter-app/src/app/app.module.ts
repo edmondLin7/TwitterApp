@@ -22,6 +22,7 @@ import { TweetCreatorComponent } from './components/tweet-creator/tweet-creator.
 
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
+import { PasswordResetModalComponent } from './components/password-reset-modal/password-reset-modal.component';
 
 @NgModule({
   declarations: [
@@ -39,9 +40,10 @@ import { UserListComponent } from './pages/user-list/user-list.component';
     ErrorPageComponent,
     HomeComponent,
     TweetCreatorComponent,
-
     UserCardComponent,
     UserListComponent,
+    PasswordResetModalComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

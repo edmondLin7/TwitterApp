@@ -28,6 +28,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="">Confirm Password</label>
+                        <input type="password" class="form-control" formControlName="password"
+                        [class.is-invalid]="password?.invalid && password?.touched">
+                        <div *ngIf="password?.errors && password?.touched">
+                            <small class="text-danger" *ngIf="password?.errors?.['required']">password is required</small>
+                            <small class="text-danger" *ngIf="password?.errors?.['minlength']">password must be 6 characters long</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <input type="submit" class="btn btn-primary btn-block" value="Login"
                         [disabled]="loginForm.invalid">
                     </div>
