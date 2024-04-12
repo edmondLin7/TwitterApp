@@ -37,5 +37,14 @@ export class ProfileComponent {
     this.settingsModal.openPopup();
   }
 
+  public isMyProfile(): boolean {
+    console.log("in isMyProfile")
+    var routeId: number = parseInt(this.activatedRoute.snapshot.paramMap.get("id")!);
+    if (this.user?.loginId === localStorage.getItem("loginId")) { 
+      return true;
+    }
+    return false;
+  }
+
 
 }

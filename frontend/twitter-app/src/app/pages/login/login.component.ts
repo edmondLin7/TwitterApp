@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PasswordResetModalComponent } from 'src/app/components/password-reset-modal/password-reset-modal.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -20,6 +21,9 @@ export class LoginComponent {
     emailOrUsername: [null, []],
     password: [null, [Validators.required, Validators.minLength(6)]]
   })
+
+  @ViewChild(PasswordResetModalComponent)
+  settingsModal!: PasswordResetModalComponent;
 
   get emailOrUsername() {
     return this.loginForm.get('emailOrUsername')
@@ -45,5 +49,10 @@ export class LoginComponent {
       this.message = error.error.message
       this.alertType = "alert alert-danger"
     })
+  }
+
+  public openPasswordReset() {
+    console.log("in openSettings")
+    this.settingsModal.openPopup();
   }
 }

@@ -38,8 +38,8 @@ export class AuthService {
     return false;
   }
 
-  resetPassword(password: string): Observable<any> {
-    let loginId: string = localStorage.getItem("loginId")!;
+  resetPassword(loginId: string, password: string): Observable<any> {
+    //let loginId: string = localStorage.getItem("loginId")!;
     return this.http.post<any>(`${this.AUTH_URL}/reset-password/${loginId}`, password)
   }
 }

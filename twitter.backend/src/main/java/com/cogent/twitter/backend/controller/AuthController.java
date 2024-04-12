@@ -23,6 +23,7 @@ public class AuthController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginDto loginDto) {
         LoginResponse response = authService.login(loginDto);
         if (response.isError()) {
+            response.setMessage("Username or password is incorrect");
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);

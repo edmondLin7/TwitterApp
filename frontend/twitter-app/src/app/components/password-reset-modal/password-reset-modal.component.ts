@@ -23,8 +23,15 @@ export class PasswordResetModalComponent implements OnInit {
   } 
   
   displayStyle = "none"; 
-  
+  loggedIn: boolean = false;
+
   openPopup() {
+    let loginId: string = localStorage.getItem("loginId")!;
+    if (!loginId) {
+      this.loggedIn = false;
+    } else {
+      this.loggedIn = true;
+    }
     console.log("in open popup")
     this.displayStyle = "block"; 
     
@@ -34,6 +41,7 @@ export class PasswordResetModalComponent implements OnInit {
   } 
 
   passwordResetForm = this.fb.group({
+    loginId: ['', [Validators.required]], 
     password: ['', [Validators.required, Validators.minLength(6)]],
     passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],
   }, {validators: this.validatePasswordConfirm})
@@ -42,8 +50,9 @@ export class PasswordResetModalComponent implements OnInit {
   public onSubmitHandler() {
     let password: string = this.password!.value!;
     console.log("resetting password...")
-    this.authService.resetPassword(password).subscribe((response) => {
+    this.authService.resetPassword(this.loginId, password).subscribe((response) => {
       console.log(response);
+      alert(response.responseMessage)
     });
   }
 
@@ -53,7 +62,15 @@ export class PasswordResetModalComponent implements OnInit {
 
   get passwordConfirm() {
     return this.passwordResetForm.get('passwordConfirm');
+  }
 
+  get loginId() {
+    if (!this.loggedIn) {
+      return this.passwordResetForm.get('loginId')!.value!;
+    } else {
+      return localStorage.getItem("loginId")!;
+    }
+    
   }
 
   public validatePasswordConfirm (controls: AbstractControl): ValidationErrors | null {
