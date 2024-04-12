@@ -17,3 +17,8 @@
     object-fit: scale-down;
 
 }
+
+.clickable:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

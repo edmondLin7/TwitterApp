@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ITweet } from 'src/app/models/tweet.model';
 
 @Component({
@@ -9,7 +10,12 @@ import { ITweet } from 'src/app/models/tweet.model';
 export class TweetComponent {
   @Input() tweet!: ITweet;
 
-  constructor() {
+  constructor(private router: Router) {
+
+  }
+
+  routeToProfile(userID: number) {
+    this.router.navigate(['/profile', userID])
 
   }
 }
