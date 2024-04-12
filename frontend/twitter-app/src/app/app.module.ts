@@ -18,6 +18,7 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
+import { TweetCreatorComponent } from './components/tweet-creator/tweet-creator.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { HomeComponent } from './pages/home/home.component';
     LogoutComponent,
     ErrorPageComponent,
     HomeComponent,
+    TweetCreatorComponent,
   ],
   imports: [
     BrowserModule,
