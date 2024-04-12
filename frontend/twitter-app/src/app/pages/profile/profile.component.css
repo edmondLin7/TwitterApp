@@ -1,0 +1,37 @@
+/* profile.component.css */
+
+/* profile.component.css */
+
+.profile {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-container {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .profile-header {
+    overflow: hidden; /* Clear floats */
+  }
+  
+  .profile-picture {
+    float: left;
+    width: 100px; /* Adjust size of profile picture */
+    height:100px; /* Adjust size of profile picture */
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .profile-info {
+    float: left;
+  }
+  
+  .profile-info h2,
+  .profile-info h3 {
+    margin: 0;
+    color: black; /* Set text color to black */
+  }  

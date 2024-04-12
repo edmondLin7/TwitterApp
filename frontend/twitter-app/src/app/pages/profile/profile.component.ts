@@ -11,9 +11,11 @@ export class ProfileComponent {
   tweets?: ITweet[];
 
   constructor(private dataService: DataService) {
-    // this.dataService.getAllTweetsByUser().subscribe((response: ITweet[]) => {
-    //   this.tweets = response;
-    // });
-
+    /*
+    this.dataService.getAllTweetsByUser().subscribe((response: ITweet[]) => {
+       this.tweets = response;
+    });
+    */
+    
   }
 }
