@@ -1,0 +1,25 @@
+<div class="text-center">
+    <div *ngIf="!creatingTweet">
+        <button class="btn btn-primary btn-block my-1"
+                (click)="toggleCreation()">Post New Tweet</button>
+
+    </div>
+    <div *ngIf="creatingTweet">
+        <form #tweetCreateForm="ngForm" (submit)="onTweetCreate()">
+            <div>
+                <label for="">Tweet Content</label>
+                <textarea 
+                rows="4" 
+                resize="none"
+                maxlength="144"
+                class="form-control" 
+                name="tweetContent"
+                [(ngModel)]="tweet.tweetContent"
+                [class.is-invalid]="(tweet.tweetContent.length===0 || tweet.tweetContent.length > 144) && tweetData.touched"></textarea>
+            </div>
+            <div class="text-center m-2">
+                <input type="submit" class="btn btn-primary"> 
+            </div>
+        </form>
+    </div>
+</div>

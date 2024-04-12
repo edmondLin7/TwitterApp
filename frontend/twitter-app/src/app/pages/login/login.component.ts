@@ -32,13 +32,14 @@ export class LoginComponent {
   onLoginHandler() {
     this.submitted = true;
     var loginDetails = {usernameOrEmail: this.loginForm.value.emailOrUsername, password: this.loginForm.value.password}
+    localStorage.setItem('loginId', loginDetails.usernameOrEmail!);
     // console.log(loginDetails)
     this.authService.login(loginDetails).subscribe((response: any) => {
       console.log(response)
       this.message = response.message
       localStorage.setItem('loginToken', response.token);
       this.alertType = "alert alert-success"
-      this.router.navigateByUrl('home')
+      this.router.navigateByUrl('')
     }, (error: any) => {
       console.log(error)
       this.message = error.error.message
