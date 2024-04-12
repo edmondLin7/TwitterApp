@@ -1,1 +1,47 @@
-<p>login works!</p>
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-3">
+            
+        </div>
+        <div class="col-md-6">
+            <div class="wrapper">
+                <h2>Login</h2>
+                <hr>
+                <form [formGroup]="loginForm" (submit)="onLoginHandler()">
+                    <div>
+                        <label for="">Email or Username</label>
+                        <input type="text" class="form-control" formControlName="emailOrUsername"
+                        [class.is-invalid]="emailOrUsername?.invalid && emailOrUsername?.touched">
+                        <div *ngIf="emailOrUsername?.errors && emailOrUsername?.touched">
+                            <small class="text-danger" *ngIf="emailOrUsername?.errors?.['required']">email or username is required</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" class="form-control" formControlName="password"
+                        [class.is-invalid]="password?.invalid && password?.touched">
+                        <div *ngIf="password?.errors && password?.touched">
+                            <small class="text-danger" *ngIf="password?.errors?.['required']">password is required</small>
+                            <small class="text-danger" *ngIf="password?.errors?.['minlength']">password must be 6 characters long</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-block" value="Login"
+                        [disabled]="loginForm.invalid">
+                    </div>
+                </form>
+                <div class="text-center">
+                    <p>Need an Account?</p>
+                    <a routerLink="/register">Register Here</a>
+                </div>
+                <div class="text-center {{alertType}} p-2" role="alert" *ngIf="submitted">
+                    <h5>{{message | titlecase}}</h5>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
