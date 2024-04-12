@@ -51,8 +51,15 @@ export class PasswordResetModalComponent implements OnInit {
     let password: string = this.password!.value!;
     console.log("resetting password...")
     this.authService.resetPassword(this.loginId, password).subscribe((response) => {
+      console.log("response")
       console.log(response);
-      alert(response.responseMessage)
+      if (!(typeof(response.error) === 'boolean')) {
+        
+        alert(response.error.responseMessage)
+      } else {
+        alert(response.responseMessage)
+
+      }
     });
   }
 
