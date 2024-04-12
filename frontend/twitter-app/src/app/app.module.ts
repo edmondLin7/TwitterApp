@@ -18,8 +18,8 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
+import { ReplyComponent } from './components/reply/reply.component';
 import { TweetCreatorComponent } from './components/tweet-creator/tweet-creator.component';
-
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 
@@ -38,8 +38,8 @@ import { UserListComponent } from './pages/user-list/user-list.component';
     LogoutComponent,
     ErrorPageComponent,
     HomeComponent,
+    ReplyComponent
     TweetCreatorComponent,
-
     UserCardComponent,
     UserListComponent,
   ],
