@@ -37,7 +37,7 @@ export class DataService {
   updateLikeTweet(tweetId: number, loginId: string, requestBody: ITweet): Observable<ITweet> {
     return this.http.put<ITweet>(`${this.BASE_URL}/${loginId}/like/${tweetId}`, requestBody);
   }
-p
+
   getAllReplies(loginId: string, tweetId: number): Observable<IReply[]> {
     return this.http.get<IReply[]>(`${this.BASE_URL}/${loginId}/replies/${tweetId}`);
   }

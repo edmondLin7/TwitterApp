@@ -1,10 +1,12 @@
+import { User } from "./user.model";
+
 export interface IReply {
-    replyid: number;
-    reply_content: string;
+    replyID: number;
+    replyContent: string;
     tag?: string; // Optional field
     timestamp?: Date; 
-    tweetid?: number;
-    userid?: number; 
+    tweetID?: number;
+    user?: User; 
     like_count?: number;
   }
   

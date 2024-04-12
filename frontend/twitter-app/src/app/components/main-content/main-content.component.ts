@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IReply } from 'src/app/models/reply.model';
 import { ITweet } from 'src/app/models/tweet.model';
 import { DataService } from 'src/app/services/data.service';
 
@@ -9,11 +10,15 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class MainContentComponent {
   tweets?: ITweet[];
+  replies?: IReply[];
 
   constructor(private dataService: DataService) {
     this.dataService.getAllTweets().subscribe((response: ITweet[]) => {
       this.tweets = response;
     });
 
+    this.dataService.getAllReplies("e", 1).subscribe((response: IReply[]) => {
+      this.replies = response;
+    });
   }
 }
