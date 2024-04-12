@@ -1,1 +1,130 @@
-<p>register works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="wrapper">
+                <h2 class="text-center">Register</h2>
+                <hr>
+                <form #registerForm="ngForm" (submit)="onSubmitHandler()">
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label class="form-label">First Name</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        name="firstName" 
+                        [(ngModel)]="userModel.firstName"
+                        #firstName="ngModel"
+                        required
+                        [class.is-invalid]="firstName.invalid && firstName.touched"/>
+                        <small class="text-danger" [class.d-none]="firstName.untouched || firstName.valid">first name is required</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        name="lastName" 
+                        [(ngModel)]="userModel.lastName"
+                        #lastName="ngModel"
+                        required
+                        [class.is-invalid]="lastName.invalid && lastName.touched"/>
+                        <small class="text-danger" [class.d-none]="lastName.untouched || lastName.valid">last name is required</small>
+                    </div>
+                    <!-- Username -->
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input 
+                        type="text" 
+                        class="form-control"
+                        name="loginId"
+                        [(ngModel)]="userModel.loginId"
+                        #loginId="ngModel"
+                        required
+                        [class.is-invalid]="loginId.invalid && loginId.touched"/>
+                        <div *ngIf="loginId.errors && loginId.touched">
+                            <small class="text-danger" *ngIf="loginId.errors['required']"
+                            >username is required</small>
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        name="email" 
+                        [(ngModel)]="userModel.email"
+                        #email="ngModel"
+                        required
+                        
+                        [class.is-invalid]="email.invalid && email.touched"/>
+                        <div *ngIf="email.errors && email.touched">
+                            <small class="text-danger" *ngIf="email.errors['required']"
+                            >email is required</small>
+                            <small class="text-danger" *ngIf="email.errors['pattern']">email is not valid</small>
+                        </div>
+
+                    </div>
+                    <!-- Mobile -->
+                    <div class="form-group">
+                        <label class="form-label">Mobile</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        name="mobile" 
+                        [(ngModel)]="userModel.contactNumber"
+                        #contactNumber="ngModel"
+                        required
+                        pattern="^\d{10}$"
+                        [class.is-invalid]="contactNumber.invalid && contactNumber.touched"/>
+                        <div *ngIf="contactNumber.errors && contactNumber.touched">
+                            <small class="text-danger" *ngIf="contactNumber.errors['required']"
+                            >contact Number is required</small>
+                            <small class="text-danger" *ngIf="contactNumber.errors['pattern']">contact number must be 10 digits</small>
+                        </div>
+                    </div>
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input 
+                        type="password" 
+                        class="form-control" 
+                        name="password" 
+                        [(ngModel)]="userModel.password"
+                        #password="ngModel"
+                        required
+                        minlength="6"
+                        [class.is-invalid]="password.invalid && password.touched"/>
+                        <div *ngIf="password.errors && password.touched">
+                            <small class="text-danger" *ngIf="password.errors['required']">
+                                password is required
+                            </small>
+                            <small class="text-danger" *ngIf="password.errors['minlength']">
+                                password must be at least 6 characters
+                            </small>
+                        </div>
+                    </div>
+                    <!-- Submit -->
+                    <div class="form-group text-center pt-3 pb-3">
+                        <button
+                        type="submit" 
+                        class="form-control btn btn-primary" 
+                        name="submit"
+                        value="Register"
+                        [disabled]="!registerForm.valid"
+                        >Register</button>
+                    </div>
+                    <div class="text-center">
+                        <p>Already have an account?</p>
+                        <a routerLink="/login">Sign in Here</a>
+                    </div>
+                    <div class="text-center {{alertType}} p-2" role="alert" *ngIf="submitted">
+                        <h5>{{message | titlecase}}</h5>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
