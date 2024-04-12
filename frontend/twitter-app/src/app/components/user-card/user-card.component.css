@@ -1,0 +1,24 @@
+.userCard {
+    background-color: #0a0a0a;
+    color: aliceblue;
+    border: 1px solid aliceblue;
+    padding: 5%;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.profilePicture {
+    /* border: 5px solid #ccc; */
+    border-radius: 100%;
+    width: 100%;
+
+    object-fit: scale-down;
+
+}
+
+.clickable:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

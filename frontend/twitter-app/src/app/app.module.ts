@@ -20,6 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { TweetCreatorComponent } from './components/tweet-creator/tweet-creator.component';
 
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +39,9 @@ import { TweetCreatorComponent } from './components/tweet-creator/tweet-creator.
     ErrorPageComponent,
     HomeComponent,
     TweetCreatorComponent,
+
+    UserCardComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,

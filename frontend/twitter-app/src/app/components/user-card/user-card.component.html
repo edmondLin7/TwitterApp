@@ -1,0 +1,22 @@
+<div class="userCard">
+    <div class="row">
+        <div class="col-3">
+            <img src="assets/images/placeholder_profile.png" alt="No profile picture found"
+                    class=" profilePicture mb-2 mt-2">
+        </div>
+        <div class="col-9">
+            <div class="row text-center">
+                <div class="col-6">
+                    <h5 class="text-primary clickable" 
+                    (click)="routeToProfile(user!.userId!)">
+                        {{ user!.loginId }}
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <p>{{ user.firstName }} {{user.lastName}}</p>
+            </div>
+
+        </div>
+    </div>
+</div>

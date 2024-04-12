@@ -10,15 +10,22 @@
 <!-- profile.component.html -->
 
 <div class="profile">
+  <app-navbar></app-navbar>
     <div class="profile-container">
       <div class="profile-header">
         <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-picture">
         <div class="profile-info">
-          <h2>Your Name</h2>
-          <h3>YourTwitterHandle</h3>
+          <h2>{{user?.firstName}} {{user?.lastName}}</h2>
+          <h3>@{{user?.loginId}}</h3>
         </div>
         <div style="clear:both;"></div>
       </div>
+      <div class="container pt-3 profile-info">
+        <h3 class="text-center display-5">Tweets</h3>
+        <div class="row" *ngFor="let tweet of  tweets">
+            <app-tweet class="w-50 mx-auto" [tweet]="tweet"></app-tweet>
+        </div>
+    </div>
     </div>
   </div>
   
