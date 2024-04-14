@@ -10,13 +10,27 @@ import { ITweet } from 'src/app/models/tweet.model';
 export class TweetComponent {
   @Input() tweet!: ITweet;
 
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
 
+  routeToProfile(userID: number): void {
+    console.log("Routing to profile: " + `/profile/${userID}`);
+    this.router.navigate(['profile', userID]);
   }
 
-  routeToProfile(userID: number) {
-    console.log("routing to: " + `/profile/${userID}`)
-    this.router.navigate(['profile', userID])
+  routeToTweetInfo(tweet: ITweet): void {
+    console.log("Routing to tweet info");
+    const currentUrl = this.router.url; // Get current URL
+    const tweetInfoUrl = '/tweetinfo';
 
+    // Check if the current route is already the tweet info page
+    if (currentUrl !== tweetInfoUrl) {
+      this.router.navigate([tweetInfoUrl], { state: { tweet } });
+    } else {
+      console.log("Already on tweet info page.");
+    }
+  }
+
+  isOnTweetInfoPage(): boolean {
+    return this.router.url === '/tweetinfo';
   }
 }

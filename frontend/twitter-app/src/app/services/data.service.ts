@@ -44,7 +44,7 @@ export class DataService {
   }
 
   postReply(reply: IReply, loginId: string, tweetId: number): Observable<IReply> {
-    return this.http.post<IReply>(`${this.BASE_URL}/${loginId}/replies/${tweetId}/add`, reply);
+    return this.http.post<IReply>(`${this.BASE_URL}/${loginId}/replies/${tweetId}`, reply);
   }
 
   getUserById(userId: number): Observable<IUser> {

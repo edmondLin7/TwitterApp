@@ -19,4 +19,5 @@ export class UserCardComponent {
     this.router.navigate(['profile', userID])
 
   }
+
 }

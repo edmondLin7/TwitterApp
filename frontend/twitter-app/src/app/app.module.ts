@@ -22,6 +22,8 @@ import { ReplyComponent } from './components/reply/reply.component';
 import { TweetCreatorComponent } from './components/tweet-creator/tweet-creator.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
+import { ReplyCreatorComponent } from './components/reply-creator/reply-creator.component';
+import { OneTweetInfoComponent } from './components/one-tweet-info/one-tweet-info.component';
 
 @NgModule({
   declarations: [
@@ -38,10 +40,13 @@ import { UserListComponent } from './pages/user-list/user-list.component';
     LogoutComponent,
     ErrorPageComponent,
     HomeComponent,
-    ReplyComponent
+    ReplyComponent,
     TweetCreatorComponent,
     UserCardComponent,
     UserListComponent,
+    ReplyCreatorComponent,
+    OneTweetInfoComponent,
+    TweetComponent
   ],
   imports: [
     BrowserModule,

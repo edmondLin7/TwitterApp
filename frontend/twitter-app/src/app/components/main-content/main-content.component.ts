@@ -16,9 +16,5 @@ export class MainContentComponent {
     this.dataService.getAllTweets().subscribe((response: ITweet[]) => {
       this.tweets = response;
     });
-
-    this.dataService.getAllReplies("e", 1).subscribe((response: IReply[]) => {
-      this.replies = response;
-    });
   }
 }
