@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1.0/tweets")
 public class ReplyController {
@@ -29,7 +30,7 @@ public class ReplyController {
         return new ResponseEntity<>(data, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{username}/reply/{tweetId}")
+    @PostMapping("/{username}/replies/{tweetId}")
     public ResponseEntity<Reply> replyToTweet(
             @PathVariable("username") String username,
             @PathVariable("tweetId") Long id, @RequestBody Reply reply) {
