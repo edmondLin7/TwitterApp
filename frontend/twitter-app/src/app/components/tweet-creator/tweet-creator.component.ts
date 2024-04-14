@@ -33,6 +33,7 @@ export class TweetCreatorComponent {
     this.dataService.postTweet(this.tweet, localStorage.getItem("loginId")!).subscribe((response) => {
       console.log(response);
       console.log(localStorage.getItem("loginId"))
+      location.reload();
     })
     this.creatingTweet = false;
   }

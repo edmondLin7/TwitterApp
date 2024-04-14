@@ -36,7 +36,8 @@ export class ReplyCreatorComponent {
       console.log(localStorage.getItem('loginId'));
       
       // After successfully posting the reply, navigate to the replyinfo component
-      this.router.navigate(['/home']);
+      // this.router.navigate(['/tweetinfo']);
+      location.reload();
     });
     console.log(localStorage.getItem('loginId'));
     // Reset the form and toggle creation form visibility
