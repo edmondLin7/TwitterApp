@@ -1,16 +1,14 @@
 package com.cogent.twitter.backend.service;
 
 import com.cogent.twitter.backend.entity.User;
-import com.cogent.twitter.backend.payload.LoginDto;
-import com.cogent.twitter.backend.payload.RegisterDto;
-import com.cogent.twitter.backend.payload.LoginResponse;
-import com.cogent.twitter.backend.payload.RegisterResponse;
+import com.cogent.twitter.backend.payload.*;
 import com.cogent.twitter.backend.repository.UserRepository;
 import com.cogent.twitter.backend.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,9 +28,17 @@ public class AuthService {
 
 
     public LoginResponse login(LoginDto loginDto) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsernameOrEmail(), loginDto.getPassword()
-        ));
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    loginDto.getUsernameOrEmail(), loginDto.getPassword()
+            ));
+        } catch (AuthenticationException exception) {
+            LoginResponse errResponse = new LoginResponse();
+            errResponse.setError(true);
+            errResponse.setMessage("login failed, username or password is incorrect");
+            return errResponse;
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -50,13 +56,13 @@ public class AuthService {
         // add check for username exists in database
         if (userRepository.existsByLoginId(registerDto.getLoginId())) {
             RegisterResponse response = new RegisterResponse(
-                    true, "Username exists", null);
+                    true, "Registration failed: Username already exists", null);
             return response;
         }
         // add check for email exists in database
         if (userRepository.existsByEmail(registerDto.getEmail())) {
             RegisterResponse response = new RegisterResponse(
-                    true, "Email already exists", null);
+                    true, "Registration failed: Email already exists", null);
             return response;
         }
 
@@ -72,8 +78,31 @@ public class AuthService {
 
         RegisterResponse response = new RegisterResponse();
         response.setError(false);
-        response.setMessage("register successful");
+        response.setMessage("Registration successful");
         response.setUser(savedUser);
+        return response;
+    }
+
+    public PasswordResetResponse resetPassword(String loginId, String password) {
+        User user;
+        if (!userRepository.existsByLoginId(loginId)) {
+            PasswordResetResponse response = new PasswordResetResponse(
+                    "Cannot reset password: Username does not exist", true);
+            return response;
+        }
+        user = userRepository.findUserByLoginId(loginId)
+                .orElseThrow(() -> new RuntimeException("This can't happen"));
+        // add check for email exists in database
+        if (!userRepository.existsByEmail(user.getEmail())) {
+            PasswordResetResponse response = new PasswordResetResponse(
+                    "Cannot reset password: Email does not exist", true);
+            return response;
+        }
+        User curUser = getUserById(user.getUserId());
+        curUser.setPassword(passwordEncoder.encode(password));
+        User savedUser = userRepository.save(curUser);
+        PasswordResetResponse response = new PasswordResetResponse(
+                "Password reset successful", false);
         return response;
     }
 

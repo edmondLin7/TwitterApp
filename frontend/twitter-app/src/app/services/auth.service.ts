@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,7 @@ export class AuthService {
       responseType: 'json'
     }
     return this.http.post<any>(`${this.AUTH_URL}/register`, data, requestOptions)
+      .pipe(catchError((error) => [error.error]));
   }
 
   login(data: any): Observable<any> {
@@ -25,6 +26,7 @@ export class AuthService {
       responseType: 'json'
     }
     return this.http.post<any>(`${this.AUTH_URL}/login`, data, requestOptions)
+      .pipe(catchError((error) => [error.error]));
   }
 
   logout() {
@@ -36,5 +38,11 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  resetPassword(loginId: string, password: string): Observable<any> {
+    //let loginId: string = localStorage.getItem("loginId")!;
+    return this.http.post<any>(`${this.AUTH_URL}/reset-password/${loginId}`, password)
+      .pipe(catchError((error) => [error.error]))
   }
 }

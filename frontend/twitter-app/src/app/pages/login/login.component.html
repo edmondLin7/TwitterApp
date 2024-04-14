@@ -27,6 +27,7 @@
                             <small class="text-danger" *ngIf="password?.errors?.['minlength']">password must be 6 characters long</small>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary btn-block" value="Login"
                         [disabled]="loginForm.invalid">
@@ -36,9 +37,13 @@
                     <p>Need an Account?</p>
                     <a routerLink="/register">Register Here</a>
                 </div>
-                <div class="text-center {{alertType}} p-2" role="alert" *ngIf="submitted">
-                    <h5>{{message | titlecase}}</h5>
+                <div class="text-center">
+                    <p (click)="openPasswordReset()" class="clickable text-primary">Forgot Password?</p>
+                    <app-password-reset-modal></app-password-reset-modal>
                 </div>
+                <!-- <div class="text-center {{alertType}} p-2" role="alert" *ngIf="submitted">
+                    <h5>{{message | titlecase}}</h5>
+                </div> -->
                 
             </div>
         </div>

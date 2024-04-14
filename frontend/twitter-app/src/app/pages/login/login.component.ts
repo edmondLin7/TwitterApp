@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PasswordResetModalComponent } from 'src/app/components/password-reset-modal/password-reset-modal.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -21,6 +22,9 @@ export class LoginComponent {
     password: [null, [Validators.required, Validators.minLength(6)]]
   })
 
+  @ViewChild(PasswordResetModalComponent)
+  settingsModal!: PasswordResetModalComponent;
+
   get emailOrUsername() {
     return this.loginForm.get('emailOrUsername')
   }
@@ -32,18 +36,27 @@ export class LoginComponent {
   onLoginHandler() {
     this.submitted = true;
     var loginDetails = {usernameOrEmail: this.loginForm.value.emailOrUsername, password: this.loginForm.value.password}
-    localStorage.setItem('loginId', loginDetails.usernameOrEmail!);
+    
     // console.log(loginDetails)
     this.authService.login(loginDetails).subscribe((response: any) => {
       console.log(response)
       this.message = response.message
-      localStorage.setItem('loginToken', response.token);
-      this.alertType = "alert alert-success"
-      this.router.navigateByUrl('')
+      alert(response.message)
+      if (!response.error) {
+        localStorage.setItem('loginToken', response.token);
+        this.alertType = "alert alert-success"
+        localStorage.setItem('loginId', loginDetails.usernameOrEmail!);
+        this.router.navigateByUrl('')
+      }
     }, (error: any) => {
       console.log(error)
-      this.message = error.error.message
+      this.message = "Login failed please try again"
       this.alertType = "alert alert-danger"
     })
+  }
+
+  public openPasswordReset() {
+    console.log("in openSettings")
+    this.settingsModal.openPopup();
   }
 }
