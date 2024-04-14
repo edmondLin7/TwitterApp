@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.cogent.twitter.backend.entity.Reply;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +27,9 @@ public class ReplyService {
     public List<Reply> getAllRepliesByTweet(String username, Long tweetId) {
         Tweet tweet = tweetRepository.findById(tweetId)
                 .orElseThrow(() -> new RuntimeException("Tweet not found"));
-        User user = userRepository.findUserByLoginId(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        return replyRepository.findAllByUserAndTweet(user, tweet);
+        return replyRepository.findAllByTweet(tweet);
+       //User user = userRepository.findUserByLoginId(username)
+        //       .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
 
@@ -49,7 +50,8 @@ public class ReplyService {
 
         // Associate the reply with the user
         reply.setUser(user);
-
+        reply.setTimestamp(LocalDateTime.now());
+        reply.setLikeCount(0L);
         // Save the reply in the database using the ReplyRepository
         return replyRepository.save(reply);
     }

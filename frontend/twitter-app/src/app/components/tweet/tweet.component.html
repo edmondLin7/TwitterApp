@@ -1,19 +1,15 @@
 <div class="tweet">
     <div class="row">
         <div class="col-3">
-            <img src="assets/images/placeholder_profile.png" alt="No profile picture found"
-                    class=" profilePicture mb-2 mt-2">
+            <img src="assets/images/placeholder_profile.png" alt="No profile picture found" class="profilePicture mb-2 mt-2">
         </div>
         <div class="col-9">
             <div class="row text-center">
                 <div class="col-6">
-                    <h5 class="text-primary clickable" 
-                    (click)="routeToProfile(tweet.user!.userId!)">
-                        {{ tweet.user!.loginId }}
-                    </h5>
+                    <h5 class="text-primary clickable" (click)="routeToProfile(tweet.user!.userId!)">{{ tweet.user!.loginId }}</h5>
                 </div>
                 <div class="col-6">
-                    <h6> {{ tweet.timestamp | date:'medium' }}</h6>
+                    <h6>{{ tweet.timestamp }}</h6>
                 </div>
             </div>
             <div class="row">
@@ -22,6 +18,10 @@
             <div class="row">
                 <p>{{ tweet.tag }}</p>
             </div>
+        </div>
+        <!-- Only display the button if not on the tweet info page -->
+        <div class="text-center m-2" *ngIf="!isOnTweetInfoPage()">
+            <button class="btn btn-primary" (click)="routeToTweetInfo(tweet)">Reply</button>
         </div>
     </div>
 </div>

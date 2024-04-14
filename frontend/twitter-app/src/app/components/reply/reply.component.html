@@ -1,0 +1,21 @@
+<div class="reply">
+    <div class="row">
+        <div class="col-3">
+            <img src="assets/images/placeholder_profile.png" alt="No profile picture found"
+                    class=" profilePicture mb-2 mt-2">
+        </div>
+        <div class="col-9">
+            <div class="row text-center">
+                <div class="col-6">
+                    <h5 class="text-primary">{{ reply!.user?.loginId}}</h5>
+                </div>
+                <div class="col-6">
+                    <h6> {{ reply!.timestamp }}</h6>
+                </div>
+            </div>
+            <div class="row">
+                <p>{{ reply!.replyContent }}</p>
+            </div>
+        </div>
+    </div>
+</div>

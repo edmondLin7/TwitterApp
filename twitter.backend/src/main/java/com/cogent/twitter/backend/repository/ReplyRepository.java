@@ -12,5 +12,5 @@ import java.util.Optional;
 @Repository
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
     List<Reply> findAllByUserLoginId(String loginId);
-    List<Reply> findAllByUserAndTweet(User user, Tweet tweet);
+    List<Reply> findAllByTweet(Tweet tweet);
 }
