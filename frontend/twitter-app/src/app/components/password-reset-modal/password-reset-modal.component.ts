@@ -46,20 +46,18 @@ export class PasswordResetModalComponent implements OnInit {
     passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],
   }, {validators: this.validatePasswordConfirm})
   
-
+  // Needs to handle Bad request caused by username existing
   public onSubmitHandler() {
     let password: string = this.password!.value!;
     console.log("resetting password...")
     this.authService.resetPassword(this.loginId, password).subscribe((response) => {
-      console.log("response")
       console.log(response);
-      if (!(typeof(response.error) === 'boolean')) {
-        
-        alert(response.error.responseMessage)
-      } else {
-        alert(response.responseMessage)
 
+      alert(response.responseMessage)
+      if (response.error == false) {
+        this.closePopup();
       }
+
     });
   }
 
@@ -81,16 +79,14 @@ export class PasswordResetModalComponent implements OnInit {
   }
 
   public validatePasswordConfirm (controls: AbstractControl): ValidationErrors | null {
-    console.log(`validating ${controls.get('password')?.value} and ${controls.get('passwordConfirm')?.value}`)
+   
     let pass: string = controls.get('password')?.value;
     let confirmPass = controls.get('passwordConfirm')?.value
     if (!pass || !confirmPass) {return null}
   
     if (pass === confirmPass) {
-      console.log("validated " + pass + " of type " + typeof(pass));
       controls.setErrors(null)
     } else {
-      console.log("Not validated")
       controls.setErrors({"notSame": true})
     }
     return pass === confirmPass ? null : { notSame: true }

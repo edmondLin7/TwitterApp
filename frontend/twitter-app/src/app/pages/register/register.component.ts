@@ -32,35 +32,47 @@ export class RegisterComponent {
   
   }
 
+  private collectRegistrationData(): User {
+    this.userModel.firstName = this.firstName!.value!;
+    this.userModel.lastName = this.lastName!.value!;
+    this.userModel.loginId = this.loginId!.value!;
+    this.userModel.email = this.email!.value!;
+    this.userModel.contactNumber = this.contactNumber!.value!;
+    this.userModel.password = this.password!.value!;
+    return this.userModel;
+  }
+
   // Submit Registration
   onSubmitHandler() {
     console.log('Submitting register')
     this.submitted=true;
+    this.userModel = this.collectRegistrationData();
     this.authService.register(this.userModel).subscribe((response: any) => {
       console.log(response)
       this.alertType = "alert alert-success"
       this.message = response.message
-      this.router.navigateByUrl('login')
-    }, (error: any) => {
-      console.log(error)
-      this.alertType = "alert alert-danger"
-      this.message = error.error.message
-      
+      alert(this.message)
+      if (!response.error) {
+        this.router.navigateByUrl('login')
+      }
     })
+    // }, (error: any) => {
+    //   console.log(error)
+    //   this.alertType = "alert alert-danger"
+    //   this.message = error.error.message
+      
+    // })
   }
 
   // Validator for ensure password and passwordConfirm match
   public validatePasswordConfirm (controls: AbstractControl): ValidationErrors | null {
-    console.log(`validating ${controls.get('password')?.value} and ${controls.get('passwordConfirm')?.value}`)
     let pass: string = controls.get('password')?.value;
     let confirmPass = controls.get('passwordConfirm')?.value
     if (!pass || !confirmPass) {return null}
   
     if (pass === confirmPass) {
-      console.log("validated " + pass + " of type " + typeof(pass));
       controls.setErrors(null)
     } else {
-      console.log("Not validated")
       controls.setErrors({"notSame": true})
     }
     return pass === confirmPass ? null : { notSame: true }

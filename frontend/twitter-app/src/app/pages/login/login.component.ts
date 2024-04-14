@@ -36,17 +36,21 @@ export class LoginComponent {
   onLoginHandler() {
     this.submitted = true;
     var loginDetails = {usernameOrEmail: this.loginForm.value.emailOrUsername, password: this.loginForm.value.password}
-    localStorage.setItem('loginId', loginDetails.usernameOrEmail!);
+    
     // console.log(loginDetails)
     this.authService.login(loginDetails).subscribe((response: any) => {
       console.log(response)
       this.message = response.message
-      localStorage.setItem('loginToken', response.token);
-      this.alertType = "alert alert-success"
-      this.router.navigateByUrl('')
+      alert(response.message)
+      if (!response.error) {
+        localStorage.setItem('loginToken', response.token);
+        this.alertType = "alert alert-success"
+        localStorage.setItem('loginId', loginDetails.usernameOrEmail!);
+        this.router.navigateByUrl('')
+      }
     }, (error: any) => {
       console.log(error)
-      this.message = error.error.message
+      this.message = "Login failed please try again"
       this.alertType = "alert alert-danger"
     })
   }

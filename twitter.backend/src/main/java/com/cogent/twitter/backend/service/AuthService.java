@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,17 @@ public class AuthService {
 
 
     public LoginResponse login(LoginDto loginDto) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsernameOrEmail(), loginDto.getPassword()
-        ));
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    loginDto.getUsernameOrEmail(), loginDto.getPassword()
+            ));
+        } catch (AuthenticationException exception) {
+            LoginResponse errResponse = new LoginResponse();
+            errResponse.setError(true);
+            errResponse.setMessage("login failed, username or password is incorrect");
+            return errResponse;
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -47,13 +56,13 @@ public class AuthService {
         // add check for username exists in database
         if (userRepository.existsByLoginId(registerDto.getLoginId())) {
             RegisterResponse response = new RegisterResponse(
-                    true, "Username exists", null);
+                    true, "Registration failed: Username already exists", null);
             return response;
         }
         // add check for email exists in database
         if (userRepository.existsByEmail(registerDto.getEmail())) {
             RegisterResponse response = new RegisterResponse(
-                    true, "Email already exists", null);
+                    true, "Registration failed: Email already exists", null);
             return response;
         }
 
@@ -69,7 +78,7 @@ public class AuthService {
 
         RegisterResponse response = new RegisterResponse();
         response.setError(false);
-        response.setMessage("register successful");
+        response.setMessage("Registration successful");
         response.setUser(savedUser);
         return response;
     }
@@ -78,7 +87,7 @@ public class AuthService {
         User user;
         if (!userRepository.existsByLoginId(loginId)) {
             PasswordResetResponse response = new PasswordResetResponse(
-                    "Username does not exist", true);
+                    "Cannot reset password: Username does not exist", true);
             return response;
         }
         user = userRepository.findUserByLoginId(loginId)
@@ -86,7 +95,7 @@ public class AuthService {
         // add check for email exists in database
         if (!userRepository.existsByEmail(user.getEmail())) {
             PasswordResetResponse response = new PasswordResetResponse(
-                    "Email does not exist", true);
+                    "Cannot reset password: Email does not exist", true);
             return response;
         }
         User curUser = getUserById(user.getUserId());

@@ -56,16 +56,19 @@
                     </div>
                     <!-- Mobile -->
                     <div class="form-group">
-                        <label class="form-label">Mobile</label>
+                        <label class="form-label">Contact Number</label>
                         <input 
                         type="text" 
                         class="form-control" 
                         formControlName="contactNumber" 
                         [class.is-invalid]="contactNumber?.invalid && contactNumber?.touched"/>
                         <div *ngIf="contactNumber?.errors && contactNumber?.touched">
-                            <small class="text-danger" *ngIf="contactNumber?.errors?.['required']"
-                            >contact Number is required</small>
-                            <small class="text-danger" *ngIf="contactNumber?.errors?.['pattern']">contact number must be 10 digits</small>
+                            <small class="text-danger" *ngIf="contactNumber?.errors?.['required']">
+                                contact Number is required
+                            </small>
+                            <small class="text-danger" *ngIf="contactNumber?.errors?.['pattern']">
+                                contact number must be 10 digits
+                            </small>
                         </div>
                     </div>
                     <!-- Password -->

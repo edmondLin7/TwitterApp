@@ -34,6 +34,7 @@ export class ProfileComponent {
 
   public openSettings() {
     console.log("in openSettings")
+    
     this.settingsModal.openPopup();
   }
 

@@ -21,6 +21,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginDto loginDto) {
+
         LoginResponse response = authService.login(loginDto);
         if (response.isError()) {
             response.setMessage("Username or password is incorrect");
