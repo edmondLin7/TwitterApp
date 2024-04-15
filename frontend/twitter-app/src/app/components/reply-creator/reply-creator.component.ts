@@ -44,4 +44,5 @@ export class ReplyCreatorComponent {
     this.replyData.reset();
     this.creatingReply = false;
   }
+
 }

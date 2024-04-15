@@ -40,4 +40,14 @@ public class ReplyController {
         }
         return new ResponseEntity<>(data, HttpStatus.CREATED);
     }
+
+    // Username is the person who liked it, not the person who owns the reply
+    @PutMapping("/{username}/replies/{replyId}/like")
+    public ResponseEntity<Reply> likeTweet(
+            @PathVariable("username") String username,
+            @PathVariable("replyId") Long replyId
+    ) {
+        Reply data = replyService.likeReply(username, replyId);
+        return ResponseEntity.ok(data);
+    }
 }

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ITweet } from 'src/app/models/tweet.model';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-tweet',
@@ -10,7 +11,9 @@ import { ITweet } from 'src/app/models/tweet.model';
 export class TweetComponent {
   @Input() tweet!: ITweet;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private dataService: DataService) {
+
+  }
 
   routeToProfile(userID: number): void {
     console.log("Routing to profile: " + `/profile/${userID}`);
@@ -32,5 +35,15 @@ export class TweetComponent {
 
   isOnTweetInfoPage(): boolean {
     return this.router.url === '/tweetinfo';
+  }
+
+  likeTweet() {
+    var currentUser = localStorage.getItem("loginId")!;
+    if (currentUser == null) return;
+    this.dataService.updateLikeTweet(this.tweet.tweetID!, currentUser).subscribe(
+      (response) => {
+        this.tweet.likeCount = response.likeCount;
+      }
+    );
   }
 }

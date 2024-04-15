@@ -1,4 +1,9 @@
 <div class="container">
+    <div class="row">
+        <app-logo></app-logo>
+        <app-navbar></app-navbar>
+    </div>
+
     <h3 class="text-center display-5">Tweets</h3>
     <div class="row" *ngFor="let user of users">
         <app-user-card class="w-50 mx-auto" [user]="user"></app-user-card>

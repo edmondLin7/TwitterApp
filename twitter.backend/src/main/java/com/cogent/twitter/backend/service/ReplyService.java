@@ -55,5 +55,12 @@ public class ReplyService {
         // Save the reply in the database using the ReplyRepository
         return replyRepository.save(reply);
     }
+
+    public Reply likeReply(String username, Long replyId) {
+        Reply reply = replyRepository.findById(replyId)
+                .orElseThrow(() -> new RuntimeException("This shouldn't happen from the frontend"));
+        reply.setLikeCount(reply.getLikeCount() + 1);
+        return replyRepository.save(reply);
+    }
 }
 

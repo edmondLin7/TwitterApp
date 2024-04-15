@@ -8,7 +8,7 @@ export interface IReply {
     timestamp?: Date; 
     tweet?: Tweet;
     user?: User; 
-    like_count?: number;
+    likeCount?: number;
 }
   export class Reply implements IReply {
     constructor(
@@ -18,7 +18,7 @@ export interface IReply {
         public tag: string = "",
         public timestamp?: Date,
         public replyID: number = 0,
-        public like_count: number = 0
+        public likeCount: number = 0
     ) {}
 
 }

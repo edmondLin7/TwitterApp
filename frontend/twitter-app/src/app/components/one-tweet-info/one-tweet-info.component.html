@@ -1,18 +1,30 @@
-<app-reply-creator [tweet]="tweet || defaultTweet"></app-reply-creator>
 <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div *ngIf="tweet">
-          <!-- Display the tweet -->
-          <app-tweet [tweet]="tweet"></app-tweet>
-        </div>
+
+  <div class="row">
+    <app-logo></app-logo>
+    <app-navbar></app-navbar>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <div *ngIf="tweet">
+        <!-- Display the tweet -->
+        <app-tweet [tweet]="tweet"></app-tweet>
       </div>
     </div>
   </div>
+</div>
+
+<div class="w-50 mx-auto">
+  <app-reply-creator [tweet]="tweet || defaultTweet"></app-reply-creator>
+</div>
   
 
 <div class="container">
+  <h4 class="text-center">Replies:</h4>
     <div class="row" *ngFor="let reply of replies">
-        <app-reply class="w-100" [reply]="reply"></app-reply>
+        <app-reply class="w-50 mx-auto" [reply]="reply"></app-reply>
     </div>
 </div>

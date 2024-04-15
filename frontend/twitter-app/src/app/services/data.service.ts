@@ -35,8 +35,8 @@ export class DataService {
     return this.http.delete<ITweet>(`${this.BASE_URL}/${loginId}/delete/${tweetId}`);
   }
 
-  updateLikeTweet(tweetId: number, loginId: string, requestBody: ITweet): Observable<ITweet> {
-    return this.http.put<ITweet>(`${this.BASE_URL}/${loginId}/like/${tweetId}`, requestBody);
+  updateLikeTweet(tweetId: number, loginId: string): Observable<ITweet> {
+    return this.http.put<ITweet>(`${this.BASE_URL}/${loginId}/like/${tweetId}`, null);
   }
 
   getAllReplies(loginId: string, tweetId: number): Observable<IReply[]> {
@@ -45,6 +45,10 @@ export class DataService {
 
   postReply(reply: IReply, loginId: string, tweetId: number): Observable<IReply> {
     return this.http.post<IReply>(`${this.BASE_URL}/${loginId}/replies/${tweetId}`, reply);
+  }
+
+  likeReply(replyId: number, loginId: string): Observable<IReply> {
+    return this.http.put<IReply>(`${this.BASE_URL}/${loginId}/replies/${replyId}/like`, null)
   }
 
   getUserById(userId: number): Observable<IUser> {
