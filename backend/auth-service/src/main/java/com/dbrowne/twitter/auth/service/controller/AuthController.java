@@ -40,11 +40,11 @@ public class AuthController {
 
     }
 
-    @PostMapping("/reset-password/{loginId}")
+    @PostMapping("/reset-password/{username}")
     public ResponseEntity<PasswordResetResponse> resetPassword(
-            @PathVariable("loginId") String loginId,
+            @PathVariable("username") String username,
             @RequestBody String password) {
-        PasswordResetResponse response = authService.resetPassword(loginId, password);
+        PasswordResetResponse response = authService.resetPassword(username, password);
         if (response.isError()) {
             return new ResponseEntity<>(
                     response,
@@ -65,9 +65,9 @@ public class AuthController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("users/loginId/{loginId}")
-    public ResponseEntity<User> getuserByName(@PathVariable("loginId") String loginId){
-        User user = authService.getUserByLoginId(loginId);
+    @GetMapping("users/username/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username){
+        User user = authService.getUserByusername(username);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

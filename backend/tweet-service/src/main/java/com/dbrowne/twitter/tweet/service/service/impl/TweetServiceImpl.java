@@ -1,9 +1,11 @@
-package com.dbrowne.twitter.auth.service.service;
+package com.dbrowne.twitter.tweet.service.service;
 
-import com.dbrowne.twitter.auth.service.entity.Tweet;
-import com.dbrowne.twitter.auth.service.entity.User;
-import com.dbrowne.twitter.auth.service.repository.TweetRepository;
-import com.dbrowne.twitter.auth.service.repository.UserRepository;
+
+import com.cogent.twitter.backend.repository.UserRepository;
+import com.dbrowne.twitter.tweet.service.entity.Tweet;
+import com.dbrowne.twitter.tweet.service.external.client.UserService;
+import com.dbrowne.twitter.tweet.service.model.User;
+import com.dbrowne.twitter.tweet.service.repository.TweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +13,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class TweetService {
+public class TweetServiceImpl {
 
     @Autowired
-    private TweetRepository tweetRepository;
+    private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
+    @Autowired TweetRepository tweetRepository;
 
     // How would this need to change at scale--finding all tweets would be too expensive to happen in app, replace with findNTweets?
     public List<Tweet> getAllTweets() {

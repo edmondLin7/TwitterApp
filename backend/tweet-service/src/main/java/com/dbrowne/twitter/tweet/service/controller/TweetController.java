@@ -1,8 +1,7 @@
-package com.dbrowne.twitter.auth.service.controller;
+package com.cogent.twitter.backend.controller;
 
-
-import com.dbrowne.twitter.auth.service.entity.Tweet;
-import com.dbrowne.twitter.auth.service.service.TweetService;
+import com.cogent.twitter.backend.entity.Tweet;
+import com.cogent.twitter.backend.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,9 @@
-package com.dbrowne.twitter.auth.service.entity;
+package com.cogent.twitter.backend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity

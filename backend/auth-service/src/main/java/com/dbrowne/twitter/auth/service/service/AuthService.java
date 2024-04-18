@@ -16,6 +16,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// We're currently manually handling error conditions -- this could likely be
+// replaced with the global exception handler and custom exception, but I'll save that
+// refactor for the future
+
 @Service
 public class AuthService {
     @Autowired
@@ -55,7 +59,7 @@ public class AuthService {
 
     public RegisterResponse register(RegisterDto registerDto) {
         // add check for username exists in database
-        if (userRepository.existsByLoginId(registerDto.getLoginId())) {
+        if (userRepository.existsByusername(registerDto.getusername())) {
             RegisterResponse response = new RegisterResponse(
                     true, "Registration failed: Username already exists", null);
             return response;
@@ -70,7 +74,7 @@ public class AuthService {
         User user = new User();
         user.setFirstName(registerDto.getFirstName());
         user.setLastName(registerDto.getLastName());
-        user.setLoginId(registerDto.getLoginId());
+        user.setusername(registerDto.getusername());
         user.setEmail(registerDto.getEmail());
         user.setContactNumber(registerDto.getContactNumber());
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
@@ -84,14 +88,14 @@ public class AuthService {
         return response;
     }
 
-    public PasswordResetResponse resetPassword(String loginId, String password) {
+    public PasswordResetResponse resetPassword(String username, String password) {
         User user;
-        if (!userRepository.existsByLoginId(loginId)) {
+        if (!userRepository.existsByusername(username)) {
             PasswordResetResponse response = new PasswordResetResponse(
                     "Cannot reset password: Username does not exist", true);
             return response;
         }
-        user = userRepository.findUserByLoginId(loginId)
+        user = userRepository.findUserByusername(username)
                 .orElseThrow(() -> new RuntimeException("This can't happen"));
         // add check for email exists in database
         if (!userRepository.existsByEmail(user.getEmail())) {
@@ -116,8 +120,8 @@ public class AuthService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public User getUserByLoginId(String loginId) {
-        return userRepository.findUserByLoginId(loginId)
+    public User getUserByusername(String username) {
+        return userRepository.findUserByusername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

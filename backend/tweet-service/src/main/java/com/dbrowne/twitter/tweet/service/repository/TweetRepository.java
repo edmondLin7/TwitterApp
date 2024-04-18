@@ -1,7 +1,7 @@
-package com.dbrowne.twitter.auth.service.repository;
+package com.cogent.twitter.backend.repository;
 
-
-import com.dbrowne.twitter.auth.service.entity.Tweet;
+import com.cogent.twitter.backend.entity.Tweet;
+import com.cogent.twitter.backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
