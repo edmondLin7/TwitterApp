@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface AuthService {
     @GetMapping("users/username/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username);
-/*
-    @GetMapping("/users/username/{username}")
-    public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username);
 
- */
+    @GetMapping("/users/id/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id);
 }

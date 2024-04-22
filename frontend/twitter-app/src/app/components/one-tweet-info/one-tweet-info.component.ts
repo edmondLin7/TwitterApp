@@ -50,10 +50,8 @@ export class OneTweetInfoComponent implements OnInit {
       (response: IReply[]) => {
         // Log the response data for debugging
         console.log(response);
+        this.replies = response;
 
-        // Filter replies to include only those associated with the fetched tweet
-        this.replies = response.filter(reply => reply.tweet?.tweetId === this.tweet?.tweetId);
-        console.log(this.replies);
       },
       error => {
         console.error('Error fetching replies:', error);

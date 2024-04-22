@@ -41,17 +41,17 @@ export class DataService {
   updateLikeTweet(tweetId: number, username: string): Observable<ITweet> {
     return this.http.put<ITweet>(`${this.BASE_URL}${this.TWEET_PREFIX}/${username}/like/${tweetId}`, null);
   }
-
+  // Get all replies
   getAllReplies(username: string, tweetId: number): Observable<IReply[]> {
-    return this.http.get<IReply[]>(`${this.BASE_URL}/${username}/replies/${tweetId}`);
+    return this.http.get<IReply[]>(`${this.BASE_URL}${this.REPLY_PREFIX}/${username}/${tweetId}`);
   }
-
+  // Post a reply
   postReply(reply: IReply, username: string, tweetId: number): Observable<IReply> {
-    return this.http.post<IReply>(`${this.BASE_URL}/${username}/replies/${tweetId}`, reply);
+    return this.http.post<IReply>(`${this.BASE_URL}${this.REPLY_PREFIX}/${username}/${tweetId}`, reply);
   }
 
   likeReply(replyId: number, username: string): Observable<IReply> {
-    return this.http.put<IReply>(`${this.BASE_URL}/${username}/replies/${replyId}/like`, null)
+    return this.http.put<IReply>(`${this.BASE_URL}/${username}/${replyId}/like`, null)
   }
   // Get user by their id
   getUserById(userId: number): Observable<IUser> {

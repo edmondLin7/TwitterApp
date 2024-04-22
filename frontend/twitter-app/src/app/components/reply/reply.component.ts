@@ -19,7 +19,7 @@ export class ReplyComponent {
     var token: string = localStorage.getItem("loginToken")!
     var currentUser = jwtDecode(token).sub!;
     if (currentUser == null) return;
-    this.dataService.likeReply(this.reply.replyID!, currentUser).subscribe(
+    this.dataService.likeReply(this.reply.replyId!, currentUser).subscribe(
       (response) => {
         this.reply.likeCount = response.likeCount;
       }

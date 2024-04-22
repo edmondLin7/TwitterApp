@@ -11,6 +11,6 @@ import java.util.List;
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
     //List<Reply> findAllByUserLoginId(String loginId);
     //List<Reply> findAllByTweet(Tweet tweet);
-    List<Reply> findAllByTweetID(Long tweetID);
+    List<Reply> findAllByTweetId(Long tweetId);
 
 }

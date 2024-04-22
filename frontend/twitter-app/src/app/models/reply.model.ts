@@ -1,23 +1,23 @@
-import { Tweet } from "./tweet.model";
-import { User } from "./user.model";
+import { ITweet, Tweet } from "./tweet.model";
+import { IUser } from "./user.model";
 
 export interface IReply {
-    replyID: number;
+    replyId: number;
     replyContent: string;
     tag?: string; // Optional field
     timestamp?: Date; 
-    tweet?: Tweet;
-    user?: User; 
+    tweet?: ITweet;
+    user?: IUser; 
     likeCount?: number;
 }
   export class Reply implements IReply {
     constructor(
         public replyContent: string= "",
-        public tweet?: Tweet,
-        public user?: User,
+        public tweet?: ITweet,
+        public user?: IUser,
         public tag: string = "",
         public timestamp?: Date,
-        public replyID: number = 0,
+        public replyId: number = 0,
         public likeCount: number = 0
     ) {}
 

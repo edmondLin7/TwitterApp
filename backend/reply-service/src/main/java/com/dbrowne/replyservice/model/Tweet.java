@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Tweet {
 
-    private Long tweetID;
+    private Long tweetId;
 
-    private Long userID;
+    private Long userId;
 
     private String tweetContent;
 
@@ -20,7 +20,7 @@ public class Tweet {
     private Long likeCount;
 
     public static class ReplyData {
-        private Long replyID;
+        private Long replyId;
         private Tweet tweet;
 
         private User user;

@@ -6,13 +6,18 @@ import com.dbrowne.replyservice.model.User;
 import com.dbrowne.replyservice.external.AuthService;
 import com.dbrowne.replyservice.external.TweetService;
 import com.dbrowne.replyservice.repository.ReplyRepository;
+import feign.FeignException;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.dbrowne.replyservice.entity.Reply;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
+@Log4j2
 @Service
 public class ReplyService {
     @Autowired
@@ -25,9 +30,13 @@ public class ReplyService {
     private AuthService authService;
 
     // need to handle errors
-    public List<Reply> getAllRepliesByTweet(String username, Long tweetId) {
+    public List<ReplyData> getAllRepliesByTweet(String username, Long tweetId) {
         // Retrieve all replies associated with the given tweetId
-        return replyRepository.findAllByTweetID(tweetId);
+        List<Reply> replyList = replyRepository.findAllByTweetId(tweetId);
+        return replyList.stream()
+                .map(this::buildReplyDataFromReply)
+                .filter(Objects::nonNull)
+                .toList();
     }
 
     public ReplyData replyToTweet(String username, Long tweetId, Reply reply) {
@@ -54,8 +63,8 @@ public class ReplyService {
 
         // Create Reply object for database storage
         Reply replyForDb = new Reply();
-        replyForDb.setTweetID(tweetId);
-        replyForDb.setUserID(user.getUserId());
+        replyForDb.setTweetId(tweetId);
+        replyForDb.setUserId(user.getUserId());
         replyForDb.setReplyContent(reply.getReplyContent());
         replyForDb.setTag(reply.getTag());
         replyForDb.setTimestamp(LocalDateTime.now());
@@ -74,6 +83,37 @@ public class ReplyService {
         reply.setLikeCount(reply.getLikeCount() + 1);
         return replyRepository.save(reply);
     }
+    private ReplyData buildReplyDataFromReply(Reply reply) {
+        ResponseEntity<User> user;
+        ResponseEntity<Tweet> tweet;
+        try {
+            user = authService.getUserById(reply.getUserId());
+        } catch (FeignException.FeignClientException ex) {
+            log.error("User not found -- continuing");
+            return null;
+        } catch (Exception ex) {
+            log.error("Unknown exception");
+            log.error(ex);
+            return null;
+        }
+        try {
+            tweet = tweetService.getTweetById(reply.getTweetId());
+        } catch (FeignException.FeignClientException ex) {
+            log.error("Tweet not found -- continuing");
+            return null;
+        }
+
+        return ReplyData.builder()
+                .replyId(reply.getReplyId())
+                .replyContent(reply.getReplyContent())
+                .tag(reply.getTag())
+                .timestamp(reply.getTimestamp())
+                .likeCount(reply.getLikeCount())
+                .tweet(tweet.getBody())
+                .user(user.getBody())
+                .build();
+    }
+
 
 
 }

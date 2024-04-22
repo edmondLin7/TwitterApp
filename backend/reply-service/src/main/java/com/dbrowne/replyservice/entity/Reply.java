@@ -17,11 +17,11 @@ public class Reply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long replyID;
+    private Long replyId;
 
-    private Long tweetID;
+    private Long tweetId;
 
-    private Long userID;
+    private Long userId;
 
     @Column(nullable = false)
     private String replyContent;

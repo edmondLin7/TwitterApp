@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name="TWEET-SERVICE/api/v1.0/auth")
+@FeignClient(name="TWEET-SERVICE/api/v1.0/tweets")
 public interface TweetService {
-    @GetMapping("/users/id/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Tweet> getTweetById(@PathVariable("id") Long tweetId);
 /*
     @GetMapping("/users/username/{username}")

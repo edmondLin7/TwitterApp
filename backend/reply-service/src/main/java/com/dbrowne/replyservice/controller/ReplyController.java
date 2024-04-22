@@ -12,14 +12,14 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1.0/tweets")
+@RequestMapping("/api/v1.0/replies")
 public class ReplyController {
     @Autowired
     private ReplyService replyService;
 
     // Not in spec, but needed to display tweet thread with original tweet and replies
-    @GetMapping("/{username}/replies/{tweetId}")
-    public ResponseEntity<List<Reply>> getAllReplies(
+    @GetMapping("/{username}/{tweetId}")
+    public ResponseEntity<List<ReplyData>> getAllReplies(
             @PathVariable("username") String username,
             @PathVariable("tweetId") Long id) {
         var data = replyService.getAllRepliesByTweet(username, id);
@@ -29,7 +29,7 @@ public class ReplyController {
         return new ResponseEntity<>(data, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{username}/replies/{tweetId}")
+    @PostMapping("/{username}/{tweetId}")
     public ResponseEntity<ReplyData> replyToTweet(
             @PathVariable("username") String username,
             @PathVariable("tweetId") Long id, @RequestBody Reply reply) {
@@ -52,7 +52,7 @@ public class ReplyController {
     }
     */
     // Username is the person who liked it, not the person who owns the reply
-    @PutMapping("/{username}/replies/{replyId}/like")
+    @PutMapping("/{username}/{replyId}/like")
     public ResponseEntity<Reply> likeTweet(
             @PathVariable("username") String username,
             @PathVariable("replyId") Long replyId
