@@ -2,6 +2,7 @@ package com.dbrowne.twitter.tweet.service.controller;
 
 
 import com.dbrowne.twitter.tweet.service.entity.Tweet;
+import com.dbrowne.twitter.tweet.service.model.TweetResponse;
 import com.dbrowne.twitter.tweet.service.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,14 +21,14 @@ public class TweetController {
 
     // Get all tweets
     @GetMapping("/all")
-    public ResponseEntity<List<Tweet>> getAllTweets() {
+    public ResponseEntity<List<TweetResponse>> getAllTweets() {
         var data = tweetService.getAllTweets();
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Tweet> getTweetById(@PathVariable("id") Long tweetId) {
-        Tweet tweet = tweetService.getTweetById(tweetId);
+    public ResponseEntity<TweetResponse> getTweetById(@PathVariable("id") Long tweetId) {
+        TweetResponse tweet = tweetService.getTweetById(tweetId);
         if (tweet == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -36,7 +37,7 @@ public class TweetController {
 
     // Get tweets by user
     @GetMapping("/user/{username}")
-    public ResponseEntity<List<Tweet>> getAllTweetsByUser(@PathVariable("username") String username) {
+    public ResponseEntity<List<TweetResponse>> getAllTweetsByUser(@PathVariable("username") String username) {
         var data = tweetService.getAllTweetsByUsername(username);
         if (data == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -46,7 +47,7 @@ public class TweetController {
 
     // post a tweet
     @PostMapping("/{username}/add")
-    public ResponseEntity<Tweet> postTweet(
+    public ResponseEntity<TweetResponse> postTweet(
             @PathVariable("username") String username,
             @RequestBody Tweet tweet) {
         var data = tweetService.postTweet(username, tweet);
@@ -58,7 +59,7 @@ public class TweetController {
 
     // update a tweet
     @PutMapping("/{username}/update/{tweetId}")
-    public ResponseEntity<Tweet> updateTweet(
+    public ResponseEntity<TweetResponse> updateTweet(
             @PathVariable("username") String username,
             @PathVariable("tweetId") Long id,
             @RequestBody Tweet tweet) {
@@ -77,10 +78,10 @@ public class TweetController {
 
     // Like a tweet
     @PutMapping("/{username}/like/{tweetId}")
-    public ResponseEntity<Tweet> likeTweet(
+    public ResponseEntity<TweetResponse> likeTweet(
             @PathVariable("username") String username,
             @PathVariable("tweetId") Long id) {
-        Tweet data = tweetService.likeTweet(username, id);
+        TweetResponse data = tweetService.likeTweet(username, id);
         if (data == null) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

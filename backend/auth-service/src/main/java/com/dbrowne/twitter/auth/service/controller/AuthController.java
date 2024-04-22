@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
-@RequestMapping("api/v1.0/auth")
+@RequestMapping("/api/v1.0/auth")
 @RestController
 public class AuthController {
 
@@ -53,19 +53,19 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("users/id/{id}")
+    @GetMapping("/users/id/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         User user = authService.getUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         var users = authService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("users/username/{username}")
+    @GetMapping("/users/username/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username){
         User user = authService.getUserByUsername(username);
         return new ResponseEntity<>(user, HttpStatus.OK);

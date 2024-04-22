@@ -6,11 +6,19 @@ spring:
     name: CLOUD-GATEWAY
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       routes:
         - id: AUTH-SERVICE
           uri: lb://AUTH-SERVICE
           predicates:
-            - Path=/api/v1.0/auth
+            - Path=/api/v1.0/auth/**
           filters:
             - name: CircuitBreaker
               args:
@@ -19,7 +27,7 @@ spring:
         - id: TWEET-SERVICE
           uri: lb://TWEET-SERVICE
           predicates:
-            - Path=/api/v1.0/tweets
+            - Path=/api/v1.0/tweets/**
           filters:
             - name: CircuitBreaker
               args:
@@ -28,16 +36,9 @@ spring:
         - id: PAYMENT-SERVICE
           uri: lb://PAYMENT-SERVICE
           predicates:
-            - Path=/api/v1.0/replies
+            - Path=/api/v1.0/replies/**
           filters:
             - name: CircuitBreaker
               args:
                 name: REPLY-SERVICE
                 fallbackuri: forward:/replyServiceFallback
-management:
-  zipkin:
-    tracing:
-      endpoint: http://localhost:9411
-  tracing:
-    sampling:
-      probability: 1.0
