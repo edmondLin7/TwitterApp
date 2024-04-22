@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { Reply } from 'src/app/models/reply.model';
 import { ITweet } from 'src/app/models/tweet.model';
 import { DataService } from 'src/app/services/data.service';
@@ -29,17 +30,18 @@ export class ReplyCreatorComponent {
   // Method to handle reply creation
   public onReplyCreate() {
     console.log("I came here");
-
+    var token: string = localStorage.getItem("loginToken")!
+    var username = jwtDecode(token).sub!;
     // Call the data service to post the reply
-    this.dataService.postReply(this.reply, localStorage.getItem('username')!, this.tweet.tweetID!).subscribe((response) => {
+    this.dataService.postReply(this.reply, username, this.tweet.tweetID!).subscribe((response) => {
       console.log(response);
-      console.log(localStorage.getItem('username'));
+      console.log(username);
       
       // After successfully posting the reply, navigate to the replyinfo component
       // this.router.navigate(['/tweetinfo']);
       location.reload();
     });
-    console.log(localStorage.getItem('username'));
+
     // Reset the form and toggle creation form visibility
     this.replyData.reset();
     this.creatingReply = false;

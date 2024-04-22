@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ITweet, Tweet } from 'src/app/models/tweet.model';
 import { DataService } from 'src/app/services/data.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-tweet-creator',
@@ -30,9 +31,11 @@ export class TweetCreatorComponent {
   public onTweetCreate() {
     // this.tweet.tweetContent = this.tweetData.get("tweetContent")!;
     console.log(this.tweet)
-    this.dataService.postTweet(this.tweet, localStorage.getItem("username")!).subscribe((response) => {
+    var token: string = localStorage.getItem("loginToken")!
+    var username = jwtDecode(token).sub!;
+    this.dataService.postTweet(this.tweet, username).subscribe((response) => {
       console.log(response);
-      console.log(localStorage.getItem("username"))
+      console.log(username)
       location.reload();
     })
     this.creatingTweet = false;

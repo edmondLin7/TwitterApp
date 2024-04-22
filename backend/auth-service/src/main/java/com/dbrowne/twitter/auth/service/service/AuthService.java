@@ -90,22 +90,18 @@ public class AuthService {
 
     public PasswordResetResponse resetPassword(String username, String password) {
         User user;
-        if (!userRepository.existsByUsername(username)) {
+        if (!userRepository.existsByUsername(username) && !userRepository.existsByEmail(username)) {
             PasswordResetResponse response = new PasswordResetResponse(
                     "Cannot reset password: Username does not exist", true);
             return response;
         }
-        user = userRepository.findByUsername(username)
+
+
+        user = userRepository.findByUsernameOrEmail(username, username)
                 .orElseThrow(() -> new RuntimeException("This can't happen"));
-        // add check for email exists in database
-        if (!userRepository.existsByEmail(user.getEmail())) {
-            PasswordResetResponse response = new PasswordResetResponse(
-                    "Cannot reset password: Email does not exist", true);
-            return response;
-        }
-        User curUser = getUserById(user.getUserId());
-        curUser.setPassword(passwordEncoder.encode(password));
-        User savedUser = userRepository.save(curUser);
+
+        user.setPassword(passwordEncoder.encode(password));
+        User savedUser = userRepository.save(user);
         PasswordResetResponse response = new PasswordResetResponse(
                 "Password reset successful", false);
         return response;
@@ -120,8 +116,9 @@ public class AuthService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    // Username or email
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username)
+        return userRepository.findByUsernameOrEmail(username, username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

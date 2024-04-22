@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
 import { IReply } from 'src/app/models/reply.model';
 import { DataService } from 'src/app/services/data.service';
 
@@ -15,7 +16,8 @@ export class ReplyComponent {
   }
 
   likeReply() {
-    var currentUser = localStorage.getItem("username")!;
+    var token: string = localStorage.getItem("loginToken")!
+    var currentUser = jwtDecode(token).sub!;
     if (currentUser == null) return;
     this.dataService.likeReply(this.reply.replyID!, currentUser).subscribe(
       (response) => {

@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { PasswordResetModalComponent } from 'src/app/components/password-reset-modal/password-reset-modal.component';
 import { ITweet } from 'src/app/models/tweet.model';
 import { IUser } from 'src/app/models/user.model';
@@ -41,7 +42,9 @@ export class ProfileComponent {
   public isMyProfile(): boolean {
     console.log("in isMyProfile")
     var routeId: number = parseInt(this.activatedRoute.snapshot.paramMap.get("id")!);
-    if (this.user?.username === localStorage.getItem("username")) { 
+    var token: string = localStorage.getItem("loginToken")!
+    var username = jwtDecode(token).sub!;
+    if (this.user?.username === username || this.user?.email === username) { 
       return true;
     }
     return false;

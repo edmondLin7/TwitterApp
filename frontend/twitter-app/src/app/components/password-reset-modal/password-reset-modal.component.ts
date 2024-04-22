@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { AuthService } from 'src/app/services/auth.service';
 import * as bootstrap from 'bootstrap';
 import { DataService } from 'src/app/services/data.service';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Component({
@@ -26,22 +27,24 @@ export class PasswordResetModalComponent implements OnInit {
   loggedIn: boolean = false;
 
   openPopup() {
-    let username: string = localStorage.getItem("username")!;
-    if (!username) {
+    var token: string = localStorage.getItem("loginToken")!
+    console.log(token)
+    if (token === null) {
       this.loggedIn = false;
     } else {
       this.loggedIn = true;
     }
-    console.log("in open popup")
-    this.displayStyle = "block"; 
     
+    console.log("in open popup")
+    this.displayStyle = "block";   
   } 
+
   closePopup() { 
     this.displayStyle = "none"; 
   } 
 
   passwordResetForm = this.fb.group({
-    username: ['', [Validators.required]], 
+    username: ['', []], 
     password: ['', [Validators.required, Validators.minLength(6)]],
     passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],
   }, {validators: this.validatePasswordConfirm})
@@ -73,7 +76,10 @@ export class PasswordResetModalComponent implements OnInit {
     if (!this.loggedIn) {
       return this.passwordResetForm.get('username')!.value!;
     } else {
-      return localStorage.getItem("username")!;
+      var token: string = localStorage.getItem("loginToken")!
+      var username = jwtDecode(token).sub!;
+      console.log(username);
+      return username;
     }
     
   }

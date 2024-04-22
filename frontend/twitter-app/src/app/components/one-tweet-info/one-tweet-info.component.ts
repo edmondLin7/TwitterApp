@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { IReply } from 'src/app/models/reply.model';
 import { ITweet } from 'src/app/models/tweet.model';
 import { DataService } from 'src/app/services/data.service';
@@ -28,8 +29,9 @@ export class OneTweetInfoComponent implements OnInit {
       console.error('Tweet information is not available.');
       return;
     }
-
-    const username = localStorage.getItem('username') || '';
+    
+    var token: string = localStorage.getItem("loginToken")!
+    const username = jwtDecode(token).sub || '';
 
     if (!username) {
       console.error('Login ID is not available in local storage.');
