@@ -1,11 +1,12 @@
-package com.dbrowne.order.service.external.client.decoder;
+package com.dbrowne.twitter.tweet.service.external.client.decoder;
 
-import com.dbrowne.order.service.exception.CustomException;
+
+import com.dbrowne.twitter.tweet.service.exception.CustomException;
+import com.dbrowne.twitter.tweet.service.model.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 import lombok.extern.log4j.Log4j2;
-import com.dbrowne.order.service.response.ErrorResponse;
 
 import java.io.IOException;
 

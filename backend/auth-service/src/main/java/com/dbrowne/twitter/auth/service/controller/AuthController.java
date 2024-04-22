@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
-@RequestMapping("api/v1.0/tweets")
+@RequestMapping("api/v1.0/auth")
 @RestController
 public class AuthController {
 
@@ -67,7 +67,7 @@ public class AuthController {
 
     @GetMapping("users/username/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username){
-        User user = authService.getUserByusername(username);
+        User user = authService.getUserByUsername(username);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

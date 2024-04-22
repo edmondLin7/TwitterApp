@@ -1,4 +1,4 @@
-package com.dbrowne.order.service.exception;
+package com.dbrowne.twitter.tweet.service.exception;
 
 import lombok.Data;
 

@@ -95,7 +95,7 @@ public class AuthService {
                     "Cannot reset password: Username does not exist", true);
             return response;
         }
-        user = userRepository.findUserByUsername(username)
+        user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("This can't happen"));
         // add check for email exists in database
         if (!userRepository.existsByEmail(user.getEmail())) {
@@ -120,8 +120,8 @@ public class AuthService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public User getUserByusername(String username) {
-        return userRepository.findUserByUsername(username)
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

@@ -1,7 +1,8 @@
-package com.cogent.twitter.backend.controller;
+package com.dbrowne.twitter.tweet.service.controller;
 
-import com.cogent.twitter.backend.entity.Tweet;
-import com.cogent.twitter.backend.service.TweetService;
+
+import com.dbrowne.twitter.tweet.service.entity.Tweet;
+import com.dbrowne.twitter.tweet.service.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class TweetController {
     // Get tweets by user
     @GetMapping("/user/{username}")
     public ResponseEntity<List<Tweet>> getAllTweetsByUser(@PathVariable("username") String username) {
-        var data = tweetService.getAllTweetsByUser(username);
+        var data = tweetService.getAllTweetsByUsername(username);
         if (data == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
