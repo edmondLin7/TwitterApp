@@ -59,7 +59,7 @@ public class AuthService {
 
     public RegisterResponse register(RegisterDto registerDto) {
         // add check for username exists in database
-        if (userRepository.existsByusername(registerDto.getusername())) {
+        if (userRepository.existsByUsername(registerDto.getUsername())) {
             RegisterResponse response = new RegisterResponse(
                     true, "Registration failed: Username already exists", null);
             return response;
@@ -74,7 +74,7 @@ public class AuthService {
         User user = new User();
         user.setFirstName(registerDto.getFirstName());
         user.setLastName(registerDto.getLastName());
-        user.setusername(registerDto.getusername());
+        user.setUsername(registerDto.getUsername());
         user.setEmail(registerDto.getEmail());
         user.setContactNumber(registerDto.getContactNumber());
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
@@ -90,12 +90,12 @@ public class AuthService {
 
     public PasswordResetResponse resetPassword(String username, String password) {
         User user;
-        if (!userRepository.existsByusername(username)) {
+        if (!userRepository.existsByUsername(username)) {
             PasswordResetResponse response = new PasswordResetResponse(
                     "Cannot reset password: Username does not exist", true);
             return response;
         }
-        user = userRepository.findUserByusername(username)
+        user = userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new RuntimeException("This can't happen"));
         // add check for email exists in database
         if (!userRepository.existsByEmail(user.getEmail())) {
@@ -121,7 +121,7 @@ public class AuthService {
     }
 
     public User getUserByusername(String username) {
-        return userRepository.findUserByusername(username)
+        return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

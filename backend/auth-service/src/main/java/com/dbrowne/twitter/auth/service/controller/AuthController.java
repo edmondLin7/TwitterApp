@@ -40,7 +40,7 @@ public class AuthController {
 
     }
 
-    @PostMapping("/reset-password/{username}")
+    @PutMapping("/reset-password/{username}")
     public ResponseEntity<PasswordResetResponse> resetPassword(
             @PathVariable("username") String username,
             @RequestBody String password) {
