@@ -30,9 +30,9 @@ export class TweetCreatorComponent {
   public onTweetCreate() {
     // this.tweet.tweetContent = this.tweetData.get("tweetContent")!;
     console.log(this.tweet)
-    this.dataService.postTweet(this.tweet, localStorage.getItem("loginId")!).subscribe((response) => {
+    this.dataService.postTweet(this.tweet, localStorage.getItem("username")!).subscribe((response) => {
       console.log(response);
-      console.log(localStorage.getItem("loginId"))
+      console.log(localStorage.getItem("username"))
       location.reload();
     })
     this.creatingTweet = false;

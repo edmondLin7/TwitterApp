@@ -40,9 +40,9 @@ export class AuthService {
     return false;
   }
 
-  resetPassword(loginId: string, password: string): Observable<any> {
-    //let loginId: string = localStorage.getItem("loginId")!;
-    return this.http.post<any>(`${this.AUTH_URL}/reset-password/${loginId}`, password)
+  resetPassword(username: string, password: string): Observable<any> {
+    //let username: string = localStorage.getItem("username")!;
+    return this.http.post<any>(`${this.AUTH_URL}/reset-password/${username}`, password)
       .pipe(catchError((error) => [error.error]))
   }
 }

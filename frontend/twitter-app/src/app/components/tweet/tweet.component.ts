@@ -38,7 +38,7 @@ export class TweetComponent {
   }
 
   likeTweet() {
-    var currentUser = localStorage.getItem("loginId")!;
+    var currentUser = localStorage.getItem("username")!;
     if (currentUser == null) return;
     this.dataService.updateLikeTweet(this.tweet.tweetID!, currentUser).subscribe(
       (response) => {

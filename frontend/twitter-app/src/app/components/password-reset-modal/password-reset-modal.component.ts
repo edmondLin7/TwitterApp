@@ -26,8 +26,8 @@ export class PasswordResetModalComponent implements OnInit {
   loggedIn: boolean = false;
 
   openPopup() {
-    let loginId: string = localStorage.getItem("loginId")!;
-    if (!loginId) {
+    let username: string = localStorage.getItem("username")!;
+    if (!username) {
       this.loggedIn = false;
     } else {
       this.loggedIn = true;
@@ -41,7 +41,7 @@ export class PasswordResetModalComponent implements OnInit {
   } 
 
   passwordResetForm = this.fb.group({
-    loginId: ['', [Validators.required]], 
+    username: ['', [Validators.required]], 
     password: ['', [Validators.required, Validators.minLength(6)]],
     passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],
   }, {validators: this.validatePasswordConfirm})
@@ -50,7 +50,7 @@ export class PasswordResetModalComponent implements OnInit {
   public onSubmitHandler() {
     let password: string = this.password!.value!;
     console.log("resetting password...")
-    this.authService.resetPassword(this.loginId, password).subscribe((response) => {
+    this.authService.resetPassword(this.username, password).subscribe((response) => {
       console.log(response);
 
       alert(response.responseMessage)
@@ -69,11 +69,11 @@ export class PasswordResetModalComponent implements OnInit {
     return this.passwordResetForm.get('passwordConfirm');
   }
 
-  get loginId() {
+  get username() {
     if (!this.loggedIn) {
-      return this.passwordResetForm.get('loginId')!.value!;
+      return this.passwordResetForm.get('username')!.value!;
     } else {
-      return localStorage.getItem("loginId")!;
+      return localStorage.getItem("username")!;
     }
     
   }

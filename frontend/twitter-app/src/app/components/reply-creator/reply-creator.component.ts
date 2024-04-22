@@ -31,15 +31,15 @@ export class ReplyCreatorComponent {
     console.log("I came here");
 
     // Call the data service to post the reply
-    this.dataService.postReply(this.reply, localStorage.getItem('loginId')!, this.tweet.tweetID!).subscribe((response) => {
+    this.dataService.postReply(this.reply, localStorage.getItem('username')!, this.tweet.tweetID!).subscribe((response) => {
       console.log(response);
-      console.log(localStorage.getItem('loginId'));
+      console.log(localStorage.getItem('username'));
       
       // After successfully posting the reply, navigate to the replyinfo component
       // this.router.navigate(['/tweetinfo']);
       location.reload();
     });
-    console.log(localStorage.getItem('loginId'));
+    console.log(localStorage.getItem('username'));
     // Reset the form and toggle creation form visibility
     this.replyData.reset();
     this.creatingReply = false;

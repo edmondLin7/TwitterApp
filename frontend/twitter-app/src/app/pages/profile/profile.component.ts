@@ -26,7 +26,7 @@ export class ProfileComponent {
     this.dataService.getUserById(id).subscribe((response: IUser) => {
       this.user = response;
       // After user is recieved, get all user's tweets
-      this.dataService.getAllTweetsByUser(this.user!.loginId!).subscribe((response: ITweet[]) => {
+      this.dataService.getAllTweetsByUser(this.user!.username!).subscribe((response: ITweet[]) => {
         this.tweets = response;
      });
     })
@@ -41,7 +41,7 @@ export class ProfileComponent {
   public isMyProfile(): boolean {
     console.log("in isMyProfile")
     var routeId: number = parseInt(this.activatedRoute.snapshot.paramMap.get("id")!);
-    if (this.user?.loginId === localStorage.getItem("loginId")) { 
+    if (this.user?.username === localStorage.getItem("username")) { 
       return true;
     }
     return false;

@@ -35,9 +35,9 @@
                         <input 
                         type="text" 
                         class="form-control"
-                        formControlName="loginId"
-                        [class.is-invalid]="loginId?.invalid && loginId?.touched"/>
-                        <div *ngIf="loginId?.errors && loginId?.touched">
+                        formControlName="username"
+                        [class.is-invalid]="username?.invalid && username?.touched"/>
+                        <div *ngIf="username?.errors && username?.touched">
                             <small class="text-danger">username is required</small>
                         </div>
                     </div>

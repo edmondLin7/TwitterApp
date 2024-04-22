@@ -10,57 +10,59 @@ import { IUser } from '../models/user.model';
 })
 export class DataService {
 
-  private BASE_URL = 'http://localhost:9001/api/v1.0/tweets';
-
+  private BASE_URL = 'http://localhost:9090';
+  private TWEET_PREFIX = "/api/v1.0/tweets";
+  private AUTH_PREFIX = "/api/v1.0/auth";
+  private REPLY_PREFIX = "/api/v1.0/replies";
   constructor(private http: HttpClient) {}
 
   getAllTweets(): Observable<ITweet[]> {
-    return this.http.get<ITweet[]>(`${this.BASE_URL}/all`);
+    return this.http.get<ITweet[]>(`${this.BASE_URL}${this.TWEET_PREFIX}/all`);
   }
 
-  getAllTweetsByUser(loginId: string): Observable<ITweet[]> {
-    return this.http.get<ITweet[]>(`${this.BASE_URL}/user/${loginId}`);
+  getAllTweetsByUser(username: string): Observable<ITweet[]> {
+    return this.http.get<ITweet[]>(`${this.BASE_URL}${this.TWEET_PREFIX}/user/${username}`);
   }
 
-  postTweet(tweet: ITweet, loginId: string): Observable<ITweet> {
-    return this.http.post<ITweet>(`${this.BASE_URL}/${loginId}/add`, tweet);
+  postTweet(tweet: ITweet, username: string): Observable<ITweet> {
+    return this.http.post<ITweet>(`${this.BASE_URL}${this.TWEET_PREFIX}/${username}/add`, tweet);
   }
 
   // newly added data
-  updateTweet(tweet: ITweet, loginId: string): Observable<ITweet> {
-    return this.http.put<ITweet>(`${this.BASE_URL}/${loginId}/update`, tweet);
+  updateTweet(tweet: ITweet, username: string): Observable<ITweet> {
+    return this.http.put<ITweet>(`${this.BASE_URL}${this.TWEET_PREFIX}/${username}/update`, tweet);
   }
 
-  deleteTweet(tweetId: number, loginId: string): Observable<ITweet> {
-    return this.http.delete<ITweet>(`${this.BASE_URL}/${loginId}/delete/${tweetId}`);
+  deleteTweet(tweetId: number, username: string): Observable<ITweet> {
+    return this.http.delete<ITweet>(`${this.BASE_URL}${this.TWEET_PREFIX}/${username}/delete/${tweetId}`);
   }
 
-  updateLikeTweet(tweetId: number, loginId: string): Observable<ITweet> {
-    return this.http.put<ITweet>(`${this.BASE_URL}/${loginId}/like/${tweetId}`, null);
+  updateLikeTweet(tweetId: number, username: string): Observable<ITweet> {
+    return this.http.put<ITweet>(`${this.BASE_URL}${this.TWEET_PREFIX}/${username}/like/${tweetId}`, null);
   }
 
-  getAllReplies(loginId: string, tweetId: number): Observable<IReply[]> {
-    return this.http.get<IReply[]>(`${this.BASE_URL}/${loginId}/replies/${tweetId}`);
+  getAllReplies(username: string, tweetId: number): Observable<IReply[]> {
+    return this.http.get<IReply[]>(`${this.BASE_URL}/${username}/replies/${tweetId}`);
   }
 
-  postReply(reply: IReply, loginId: string, tweetId: number): Observable<IReply> {
-    return this.http.post<IReply>(`${this.BASE_URL}/${loginId}/replies/${tweetId}`, reply);
+  postReply(reply: IReply, username: string, tweetId: number): Observable<IReply> {
+    return this.http.post<IReply>(`${this.BASE_URL}/${username}/replies/${tweetId}`, reply);
   }
 
-  likeReply(replyId: number, loginId: string): Observable<IReply> {
-    return this.http.put<IReply>(`${this.BASE_URL}/${loginId}/replies/${replyId}/like`, null)
+  likeReply(replyId: number, username: string): Observable<IReply> {
+    return this.http.put<IReply>(`${this.BASE_URL}/${username}/replies/${replyId}/like`, null)
   }
 
   getUserById(userId: number): Observable<IUser> {
-    return this.http.get<IUser>(`${this.BASE_URL}/users/id/${userId}`)
+    return this.http.get<IUser>(`${this.BASE_URL}${this.AUTH_PREFIX}/users/id/${userId}`)
   }
 
-  getUserByName(loginId: string): Observable<IUser> {
-    return this.http.get<IUser>(`${this.BASE_URL}/users/loginId/${loginId}`)
+  getUserByName(username: string): Observable<IUser> {
+    return this.http.get<IUser>(`${this.BASE_URL}${this.AUTH_PREFIX}/users/username/${username}`)
   }
 
   getAllUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.BASE_URL}/users`)
+    return this.http.get<IUser[]>(`${this.BASE_URL}${this.AUTH_PREFIX}/users`)
   }
   
 }

@@ -15,7 +15,7 @@ export class ReplyComponent {
   }
 
   likeReply() {
-    var currentUser = localStorage.getItem("loginId")!;
+    var currentUser = localStorage.getItem("username")!;
     if (currentUser == null) return;
     this.dataService.likeReply(this.reply.replyID!, currentUser).subscribe(
       (response) => {

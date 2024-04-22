@@ -29,9 +29,9 @@ export class OneTweetInfoComponent implements OnInit {
       return;
     }
 
-    const loginId = localStorage.getItem('loginId') || '';
+    const username = localStorage.getItem('username') || '';
 
-    if (!loginId) {
+    if (!username) {
       console.error('Login ID is not available in local storage.');
       // Consider redirecting to a login page or displaying a message to the user
       return;
@@ -44,7 +44,7 @@ export class OneTweetInfoComponent implements OnInit {
       return;
     }
 
-    this.dataService.getAllReplies(loginId, this.tweet.tweetID).subscribe(
+    this.dataService.getAllReplies(username, this.tweet.tweetID).subscribe(
       (response: IReply[]) => {
         // Log the response data for debugging
         console.log(response);
