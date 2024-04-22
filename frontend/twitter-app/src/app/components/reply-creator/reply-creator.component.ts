@@ -33,7 +33,7 @@ export class ReplyCreatorComponent {
     var token: string = localStorage.getItem("loginToken")!
     var username = jwtDecode(token).sub!;
     // Call the data service to post the reply
-    this.dataService.postReply(this.reply, username, this.tweet.tweetID!).subscribe((response) => {
+    this.dataService.postReply(this.reply, username, this.tweet.tweetId!).subscribe((response) => {
       console.log(response);
       console.log(username);
       

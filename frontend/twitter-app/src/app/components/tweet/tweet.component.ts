@@ -42,7 +42,8 @@ export class TweetComponent {
     var token: string = localStorage.getItem("loginToken")!
     var currentUser = jwtDecode(token).sub!;
     if (currentUser == null) return;
-    this.dataService.updateLikeTweet(this.tweet.tweetID!, currentUser).subscribe(
+    console.log(this.tweet);
+    this.dataService.updateLikeTweet(this.tweet.tweetId!, currentUser).subscribe(
       (response) => {
         this.tweet.likeCount = response.likeCount;
       }

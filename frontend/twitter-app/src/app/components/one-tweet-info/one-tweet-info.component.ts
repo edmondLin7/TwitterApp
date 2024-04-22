@@ -41,18 +41,18 @@ export class OneTweetInfoComponent implements OnInit {
 
     
     // Ensure tweet is defined before fetching replies
-    if (!this.tweet || this.tweet.tweetID === undefined) {
+    if (!this.tweet || this.tweet.tweetId === undefined) {
       console.error('Tweet information is not available.');
       return;
     }
 
-    this.dataService.getAllReplies(username, this.tweet.tweetID).subscribe(
+    this.dataService.getAllReplies(username, this.tweet.tweetId).subscribe(
       (response: IReply[]) => {
         // Log the response data for debugging
         console.log(response);
 
         // Filter replies to include only those associated with the fetched tweet
-        this.replies = response.filter(reply => reply.tweet?.tweetID === this.tweet?.tweetID);
+        this.replies = response.filter(reply => reply.tweet?.tweetId === this.tweet?.tweetId);
         console.log(this.replies);
       },
       error => {
