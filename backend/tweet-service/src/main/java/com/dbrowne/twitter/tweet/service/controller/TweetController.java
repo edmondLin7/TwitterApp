@@ -25,6 +25,15 @@ public class TweetController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Tweet> getTweetById(@PathVariable("id") Long tweetId) {
+        Tweet tweet = tweetService.getTweetById(tweetId);
+        if (tweet == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(tweet, HttpStatus.OK);
+    }
+
     // Get tweets by user
     @GetMapping("/user/{username}")
     public ResponseEntity<List<Tweet>> getAllTweetsByUser(@PathVariable("username") String username) {

@@ -44,6 +44,12 @@ public class TweetServiceImpl implements TweetService {
         return tweetRepository.findAllByUserId(userId);
     }
 
+    @Override
+    public Tweet getTweetById(Long tweetId) {
+        return tweetRepository.findById(tweetId)
+                .orElseThrow(() -> new CustomException("Tweet not found", "TWEET_NOT_FOUND", 404));
+    }
+
     public Tweet postTweet(String username, Tweet tweet) {
         // Get user so we can associate it
         User user = getUserByUsername(username);
