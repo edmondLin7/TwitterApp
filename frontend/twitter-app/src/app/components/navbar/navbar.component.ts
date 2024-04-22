@@ -11,5 +11,6 @@ export class NavbarComponent {
   public logout() {
     console.log("logging out")
     localStorage.clear();
+    location.reload();
   }
 }
