@@ -147,7 +147,7 @@ public class TweetServiceImpl implements TweetService {
         return (Objects.equals(tweetUserId, user.getUserId()));
     }
 
-    private TweetResponse buildTweetResponseFromTweet(Tweet tweet) {
+    protected TweetResponse buildTweetResponseFromTweet(Tweet tweet) {
         ResponseEntity<User> user;
         try {
             user = userService.getUserById(tweet.getUserId());
