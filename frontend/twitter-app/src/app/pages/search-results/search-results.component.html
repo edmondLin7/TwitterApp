@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- <app-logo></app-logo> -->
+        <app-navbar></app-navbar>
+    </div>
+    <div class="row mx-auto">
+        <div class="col-md-3">
+            <!--  -->
+        </div>
+        <div class="col-md-6">
+            <div class="container">
+                <div class="row" *ngFor="let tweet of tweets">
+                    <app-tweet class="w-100" [tweet]="tweet"></app-tweet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

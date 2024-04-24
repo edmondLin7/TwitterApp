@@ -64,7 +64,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     public List<TweetResponse> getAllTweetsByTag(String tag) {
-        List<Tweet> tweets = tweetRepository.findAllByTag(tag);
+        List<Tweet> tweets = tweetRepository.findAllByTagContains(tag);
         return tweets.stream()
                 .map(this::buildTweetResponseFromTweet)
                 .filter(Objects::nonNull)

@@ -24,6 +24,11 @@ export class DataService {
   getAllTweetsByUser(username: string): Observable<ITweet[]> {
     return this.http.get<ITweet[]>(`${this.BASE_URL}${this.TWEET_PREFIX}/user/${username}`);
   }
+  // get all tweets by tag
+  getAllTweetsByTag(tag: string): Observable<ITweet[]> {
+    return this.http.get<ITweet[]>(`${this.BASE_URL}${this.TWEET_PREFIX}/tag/${tag}`)
+  }
+
   // Post a tweet
   postTweet(tweet: ITweet, username: string): Observable<ITweet> {
     return this.http.post<ITweet>(`${this.BASE_URL}${this.TWEET_PREFIX}/${username}/add`, tweet);
@@ -51,7 +56,7 @@ export class DataService {
   }
 
   likeReply(replyId: number, username: string): Observable<IReply> {
-    return this.http.put<IReply>(`${this.BASE_URL}/${username}/${replyId}/like`, null)
+    return this.http.put<IReply>(`${this.BASE_URL}${this.REPLY_PREFIX}/${username}/${replyId}/like`, null)
   }
   // Get user by their id
   getUserById(userId: number): Observable<IUser> {

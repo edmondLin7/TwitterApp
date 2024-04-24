@@ -42,7 +42,7 @@ public class TweetController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
-    @GetMapping("tag/{tag}") ResponseEntity<List<TweetResponse>> getAllTweetsByTag(
+    @GetMapping("/tag/{tag}") ResponseEntity<List<TweetResponse>> getAllTweetsByTag(
             @PathVariable("tag") String tag) {
         var data = tweetService.getAllTweetsByTag(tag);
         return new ResponseEntity<>(data, HttpStatus.OK);

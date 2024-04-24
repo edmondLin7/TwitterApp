@@ -127,7 +127,7 @@ class TweetServiceImplTest {
         tagContentTweets.add(tweets.get(0));
         tagContentTweets.add(tweets.get(2));
         // base repository method used
-        given(tweetRepository.findAllByTag("tagContent")).willReturn(tagContentTweets);
+        given(tweetRepository.findAllByTagContains("tagContent")).willReturn(tagContentTweets);
         // needed to associate response with user
         given(userService.getUserById(1L)).willReturn(new ResponseEntity<>(user1, HttpStatusCode.valueOf(200)));
         given(userService.getUserById(2L)).willReturn(new ResponseEntity<>(user2, HttpStatusCode.valueOf(200)));
