@@ -9,9 +9,11 @@ public interface TweetService {
     public List<TweetResponse> getAllTweets();
     public List<TweetResponse> getAllTweetsByUsername(String username);
     public List<TweetResponse> getAllTweetsByUserId(Long userId);
+    public List<TweetResponse> getAllTweetsByTag(String tag);
     public TweetResponse getTweetById(Long tweetId);
     public TweetResponse postTweet(String username, Tweet tweet);
     public TweetResponse updateTweet(String username, Long id, Tweet newTweet);
     public String deleteTweet(String username, Long id);
     public TweetResponse likeTweet(String username, Long id);
+
 }

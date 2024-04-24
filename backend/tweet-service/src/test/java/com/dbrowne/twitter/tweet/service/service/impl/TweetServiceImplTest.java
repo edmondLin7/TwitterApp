@@ -68,7 +68,7 @@ class TweetServiceImplTest {
                 .timestamp(LocalDateTime.now())
                 .likeCount(0L)
                 .tweetContent("Test 3 content")
-                .tag("#tag3Content")
+                .tag("#tagContent")
                 .userId(2L)
                 .build());
         user1 = new User(1L, "first", "last", "email", "username", "password", "1234567899");
@@ -119,6 +119,25 @@ class TweetServiceImplTest {
         assertThat(tweetsOut.get(1)).isNotNull();
         assertThat(tweetsOut.size()).isEqualTo(2);
         assertThat(tweetsOut.get(0).getTweetId()).isEqualTo(tweets.get(0).getTweetId());
+    }
+
+    @Test
+    void getAllTweetsByTag() {
+        List<Tweet> tagContentTweets = new ArrayList<>();
+        tagContentTweets.add(tweets.get(0));
+        tagContentTweets.add(tweets.get(2));
+        // base repository method used
+        given(tweetRepository.findAllByTag("tagContent")).willReturn(tagContentTweets);
+        // needed to associate response with user
+        given(userService.getUserById(1L)).willReturn(new ResponseEntity<>(user1, HttpStatusCode.valueOf(200)));
+        given(userService.getUserById(2L)).willReturn(new ResponseEntity<>(user2, HttpStatusCode.valueOf(200)));
+
+        List<TweetResponse> tweetsOutWithTag = tweetService.getAllTweetsByTag("tagContent");
+
+        assertThat(tweetsOutWithTag).isNotNull();
+        assertThat(tweetsOutWithTag.size()).isEqualTo(2);
+        assertThat(tweetsOutWithTag.get(0).getTweetId()).isEqualTo(1L);
+        assertThat(tweetsOutWithTag.get(1).getTweetId()).isEqualTo(3L);
     }
 
     @Test
