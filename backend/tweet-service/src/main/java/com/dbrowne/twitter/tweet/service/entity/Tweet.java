@@ -1,9 +1,12 @@
 package com.dbrowne.twitter.tweet.service.entity;
 
+import com.dbrowne.twitter.tweet.service.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +20,7 @@ public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tweetId;
+
     @Column(name="user_id")
     private Long userId;
 

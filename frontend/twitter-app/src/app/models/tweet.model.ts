@@ -1,7 +1,7 @@
 import { IUser } from "./user.model";
 
 export interface ITweet {
-    tweetID?: number;
+    tweetId?: number;
     user?: IUser;
     tweetContent: string;
     tag?: string;
@@ -13,7 +13,7 @@ export class Tweet implements ITweet{
     likeCount: number;
     constructor(
         public tweetContent: string,
-        public tweetID?: number,
+        public tweetId?: number,
         public user?: IUser,
         public tag?: string,
         public timestamp?: Date,

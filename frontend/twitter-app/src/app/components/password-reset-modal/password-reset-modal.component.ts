@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { AuthService } from 'src/app/services/auth.service';
 import * as bootstrap from 'bootstrap';
 import { DataService } from 'src/app/services/data.service';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Component({
@@ -26,22 +27,24 @@ export class PasswordResetModalComponent implements OnInit {
   loggedIn: boolean = false;
 
   openPopup() {
-    let loginId: string = localStorage.getItem("loginId")!;
-    if (!loginId) {
+    var token: string = localStorage.getItem("loginToken")!
+    console.log(token)
+    if (token === null) {
       this.loggedIn = false;
     } else {
       this.loggedIn = true;
     }
-    console.log("in open popup")
-    this.displayStyle = "block"; 
     
+    console.log("in open popup")
+    this.displayStyle = "block";   
   } 
+
   closePopup() { 
     this.displayStyle = "none"; 
   } 
 
   passwordResetForm = this.fb.group({
-    loginId: ['', [Validators.required]], 
+    username: ['', []], 
     password: ['', [Validators.required, Validators.minLength(6)]],
     passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],
   }, {validators: this.validatePasswordConfirm})
@@ -50,7 +53,7 @@ export class PasswordResetModalComponent implements OnInit {
   public onSubmitHandler() {
     let password: string = this.password!.value!;
     console.log("resetting password...")
-    this.authService.resetPassword(this.loginId, password).subscribe((response) => {
+    this.authService.resetPassword(this.username, password).subscribe((response) => {
       console.log(response);
 
       alert(response.responseMessage)
@@ -69,11 +72,14 @@ export class PasswordResetModalComponent implements OnInit {
     return this.passwordResetForm.get('passwordConfirm');
   }
 
-  get loginId() {
+  get username() {
     if (!this.loggedIn) {
-      return this.passwordResetForm.get('loginId')!.value!;
+      return this.passwordResetForm.get('username')!.value!;
     } else {
-      return localStorage.getItem("loginId")!;
+      var token: string = localStorage.getItem("loginToken")!
+      var username = jwtDecode(token).sub!;
+      console.log(username);
+      return username;
     }
     
   }

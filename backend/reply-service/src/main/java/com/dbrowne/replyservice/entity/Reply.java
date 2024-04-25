@@ -1,7 +1,11 @@
 package com.dbrowne.replyservice.entity;
 
+import com.dbrowne.replyservice.model.Tweet;
+import com.dbrowne.replyservice.model.User;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,15 +17,11 @@ public class Reply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long replyID;
+    private Long replyId;
 
-    @ManyToOne
-    @JoinColumn(name = "tweetID")
-    private Tweet tweet;
+    private Long tweetId;
 
-    @ManyToOne
-    @JoinColumn(name = "userID")
-    private User user;
+    private Long userId;
 
     @Column(nullable = false)
     private String replyContent;
@@ -30,4 +30,5 @@ public class Reply {
 
     private LocalDateTime timestamp;
     private Long likeCount;
+
 }

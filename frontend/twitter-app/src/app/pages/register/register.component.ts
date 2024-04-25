@@ -21,7 +21,7 @@ export class RegisterComponent {
   registerForm = this.fb.group({
     firstName:        ['', [Validators.required]],
     lastName:         ['', [Validators.required]],
-    loginId:          ['', [Validators.required]],
+    username:          ['', [Validators.required]],
     email:            ['', [Validators.required, Validators.email]],
     contactNumber:    ['', [Validators.required, Validators.pattern(/^\d{10}/)]],
     password:         ['', [Validators.required, Validators.minLength(6)]],
@@ -35,7 +35,7 @@ export class RegisterComponent {
   private collectRegistrationData(): User {
     this.userModel.firstName = this.firstName!.value!;
     this.userModel.lastName = this.lastName!.value!;
-    this.userModel.loginId = this.loginId!.value!;
+    this.userModel.username = this.username!.value!;
     this.userModel.email = this.email!.value!;
     this.userModel.contactNumber = this.contactNumber!.value!;
     this.userModel.password = this.password!.value!;
@@ -86,8 +86,8 @@ export class RegisterComponent {
   get lastName() {
     return this.registerForm.get("lastName");
   }
-  get loginId() {
-    return this.registerForm.get("loginId");
+  get username() {
+    return this.registerForm.get("username");
   }
   get email() {
     return this.registerForm.get("email");

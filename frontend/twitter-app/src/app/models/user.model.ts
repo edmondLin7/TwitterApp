@@ -6,7 +6,7 @@ export interface IUser {
     firstName?: string;
     lastName?: string;
     email?: string;
-    loginId?: string;
+    username?: string;
     password?: string;
     contactNumber?: string
 }
@@ -17,7 +17,7 @@ export class User implements IUser {
         public firstName?: string,
         public lastName?: string,
         public email?: string,
-        public loginId?: string,
+        public username?: string,
         public password?: string,
         public contactNumber?: string) {}
 }

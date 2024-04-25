@@ -7,7 +7,7 @@ import { Observable, catchError } from 'rxjs';
 })
 export class AuthService {
 
-  private AUTH_URL = 'http://localhost:9001/api/v1.0/tweets'
+  private AUTH_URL = 'http://localhost:9090/api/v1.0/auth'
 
   constructor(private http: HttpClient) { }
 
@@ -40,9 +40,8 @@ export class AuthService {
     return false;
   }
 
-  resetPassword(loginId: string, password: string): Observable<any> {
-    //let loginId: string = localStorage.getItem("loginId")!;
-    return this.http.post<any>(`${this.AUTH_URL}/reset-password/${loginId}`, password)
+  resetPassword(username: string, password: string): Observable<any> {
+    return this.http.put<any>(`${this.AUTH_URL}/reset-password/${username}`, password)
       .pipe(catchError((error) => [error.error]))
   }
 }

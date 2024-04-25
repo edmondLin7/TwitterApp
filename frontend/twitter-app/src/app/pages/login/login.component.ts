@@ -45,7 +45,6 @@ export class LoginComponent {
       if (!response.error) {
         localStorage.setItem('loginToken', response.token);
         this.alertType = "alert alert-success"
-        localStorage.setItem('loginId', loginDetails.usernameOrEmail!);
         this.router.navigateByUrl('')
       }
     }, (error: any) => {

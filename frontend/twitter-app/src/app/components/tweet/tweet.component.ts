@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { ITweet } from 'src/app/models/tweet.model';
 import { DataService } from 'src/app/services/data.service';
 
@@ -38,9 +39,11 @@ export class TweetComponent {
   }
 
   likeTweet() {
-    var currentUser = localStorage.getItem("loginId")!;
+    var token: string = localStorage.getItem("loginToken")!
+    var currentUser = jwtDecode(token).sub!;
     if (currentUser == null) return;
-    this.dataService.updateLikeTweet(this.tweet.tweetID!, currentUser).subscribe(
+    console.log(this.tweet);
+    this.dataService.updateLikeTweet(this.tweet.tweetId!, currentUser).subscribe(
       (response) => {
         this.tweet.likeCount = response.likeCount;
       }

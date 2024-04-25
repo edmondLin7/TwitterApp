@@ -3,11 +3,11 @@ server:
 
 spring:
   application:
-    name: USER-SERVICE
+    name: AUTH-SERVICE
   datasource:
     url: jdbc:mysql://localhost:3306/twitter_microservices
     username: root
-    password: 314159
+    password: edmondlin
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

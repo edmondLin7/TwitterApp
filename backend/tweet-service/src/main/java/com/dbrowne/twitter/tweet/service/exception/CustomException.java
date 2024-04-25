@@ -3,7 +3,7 @@ package com.dbrowne.twitter.tweet.service.exception;
 import lombok.Data;
 
 @Data
-public class CustomException extends RuntimeException{
+public class CustomException extends RuntimeException {
     public String errorCode;
     public int status;
 

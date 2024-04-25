@@ -6,7 +6,7 @@
         <div class="col-9">
             <div class="row text-center">
                 <div class="col-6">
-                    <h5 class="text-primary clickable" (click)="routeToProfile(tweet.user!.userId!)">{{ tweet.user!.loginId }}</h5>
+                    <h5 class="text-primary clickable" (click)="routeToProfile(tweet.user!.userId!)">{{ tweet.user!.username }}</h5>
                 </div>
                 <div class="col-6">
                     <h6>{{ tweet.timestamp | date:"medium"}}</h6>
