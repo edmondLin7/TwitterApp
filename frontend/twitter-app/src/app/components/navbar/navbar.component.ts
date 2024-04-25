@@ -21,7 +21,6 @@ export class NavbarComponent {
     tag = tag.replace("#","")
     this.router.navigate(["searchResult", tag])
       .then(() => window.location.reload())
-    //location.reload();
   }
 
   isLoggedIn(): boolean {

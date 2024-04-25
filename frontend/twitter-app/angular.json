@@ -23,12 +23,17 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+            ],            
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.css"
-            ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+            ]
+
           },
           "configurations": {
             "production": {

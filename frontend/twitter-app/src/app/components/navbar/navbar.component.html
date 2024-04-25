@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark nav-fill">
   <app-logo class="navbar-brand "></app-logo>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav nav">
         <li class="nav-item active" >
           <li class="nav-item" *ngIf="!isLoggedIn()">
             <a class="nav-link" routerLink="/login">
@@ -29,10 +29,10 @@
           </a>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto my-auto">
-        <li class="nav-item ms-auto">
-          <form class="form-inline h-50 ">
-            <input class="form-control mr-sm-2" 
+      <ul class="nav flex-fill">
+        <li class="nav-item">
+          <form class="form-inline h-50">
+            <input class="form-control mr-sm-2 mx-auto" 
               type="search" 
               placeholder="Search"
               id="tagSearch"
@@ -42,11 +42,8 @@
               (click)="search(searchTag.value)">Search
           </button>
           </form>
-
         </li>
-
       </ul>
-      
     </div>
   </nav>
   

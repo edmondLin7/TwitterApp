@@ -3,3 +3,7 @@ body {
     background-color: black;
     color: white;
 }
+
+app-navbar {
+    width: 100%;
+}
