@@ -13,4 +13,7 @@ public class RegisterDto {
     private String email;
     private String password;
     private String contactNumber;
+
+    public RegisterDto(String username, String password) {
+    }
 }

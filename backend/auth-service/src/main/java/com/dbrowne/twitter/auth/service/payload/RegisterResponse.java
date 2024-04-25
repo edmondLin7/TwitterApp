@@ -12,4 +12,9 @@ public class RegisterResponse {
     private boolean error;
     private String message;
     private User user;
+
+    public RegisterResponse(boolean error, String success) {
+        this.error = error;
+        this.message = success;
+    }
 }
