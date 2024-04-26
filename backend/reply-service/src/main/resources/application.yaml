@@ -5,11 +5,16 @@ spring:
   application:
     name: REPLY-SERVICE
   datasource:
-    url: jdbc:mysql://localhost:3306/twitter_microservices
-    username: root
-    password: 314159
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB_NAME:twitter_microservices}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+eureka:
+  client:
+    serviceURL:
+      defaultZone: http://service-registry:8761/eureka
