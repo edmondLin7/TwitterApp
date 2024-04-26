@@ -90,4 +90,15 @@ services:
       - MYSQL_PASSWORD=root
     ports:
       - 9003:9003
-
+      
+  config-server:
+    container_name: config-server
+    image: dbrowne/twitter-config-server
+    build: ./backend/config-server
+    networks:
+      - mysqlnetwork
+    depends_on:
+      - service-registry
+      - mysql-service
+    ports:
+      - 9296:9296
