@@ -1,0 +1,93 @@
+networks:
+  mysqlnetwork: {}
+
+services:
+
+  service-registry:
+    container_name: service-registry 
+    image: dbrowne/twitter/service-registry
+    build: ./backend/service-registry
+    ports:
+      - 8762:8761
+    networks:
+      - mysqlnetwork
+
+
+  mysql-service:
+    container_name: mysql-service
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=twitter_microservices
+    networks:
+      - mysqlnetwork
+
+  cloud-gateway:
+    container_name: cloud-gateway
+    image: dbrowne/twitter-cloud-gateway
+    build: ./backend/cloud-gateway
+    networks:
+      - mysqlnetwork
+    depends_on:
+      - service-registry
+      - mysql-service
+    ports:
+      - 9090:9090
+
+  auth-service:
+    container_name: auth-service
+    image: dbrowne/twitter-auth-service
+    build: ./backend/auth-service
+    networks:
+      - mysqlnetwork
+    depends_on:
+      - service-registry
+      - mysql-service
+    environment:
+      - MYSQL_HOST=mysql-service
+      - MYSQL_PORT=3306
+      - MYSQL_DB_NAME=twitter_microservices
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    ports:
+      - 9001:9001
+
+  tweet-service:
+    container_name: tweet-service
+    image: dbrowne/twitter-tweet-service
+    build: ./backend/tweet-service
+    networks:
+      - mysqlnetwork
+    depends_on:
+      - service-registry
+      - mysql-service
+    environment:
+      - MYSQL_HOST=mysql-service
+      - MYSQL_PORT=3306
+      - MYSQL_DB_NAME=twitter_microservices
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    ports:
+      - 9002:9002
+
+  reply-service:
+    container_name: reply-service
+    image: dbrowne/twitter-reply-service
+    build: ./backend/reply-service
+    networks:
+      - mysqlnetwork
+    depends_on:
+      - service-registry
+      - mysql-service
+    environment:
+      - MYSQL_HOST=mysql-service
+      - MYSQL_PORT=3306
+      - MYSQL_DB_NAME=twitter_microservices
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    ports:
+      - 9003:9003
+
