@@ -1,16 +1,18 @@
 networks:
   mysqlnetwork: {}
+  jenkins: {}
 
 services:
 
   service-registry:
     container_name: service-registry 
-    image: dbrowne/twitter/service-registry
+    image: dsbrowne/twitter-service-registry
     build: ./backend/service-registry
     ports:
       - 8762:8761
     networks:
       - mysqlnetwork
+      - jenkins
 
 
   mysql-service:
@@ -24,13 +26,15 @@ services:
       - MYSQL_DATABASE=twitter_microservices
     networks:
       - mysqlnetwork
+      - jenkins
 
   cloud-gateway:
     container_name: cloud-gateway
-    image: dbrowne/twitter-cloud-gateway
+    image: dsbrowne/twitter-cloud-gateway
     build: ./backend/cloud-gateway
     networks:
       - mysqlnetwork
+      - jenkins
     depends_on:
       - service-registry
       - mysql-service
@@ -39,10 +43,11 @@ services:
 
   auth-service:
     container_name: auth-service
-    image: dbrowne/twitter-auth-service
+    image: dsbrowne/twitter-auth-service
     build: ./backend/auth-service
     networks:
       - mysqlnetwork
+      - jenkins
     depends_on:
       - service-registry
       - mysql-service
@@ -57,10 +62,11 @@ services:
 
   tweet-service:
     container_name: tweet-service
-    image: dbrowne/twitter-tweet-service
+    image: dsbrowne/twitter-tweet-service
     build: ./backend/tweet-service
     networks:
       - mysqlnetwork
+      - jenkins
     depends_on:
       - service-registry
       - mysql-service
@@ -75,10 +81,11 @@ services:
 
   reply-service:
     container_name: reply-service
-    image: dbrowne/twitter-reply-service
+    image: dsbrowne/twitter-reply-service
     build: ./backend/reply-service
     networks:
       - mysqlnetwork
+      - jenkins
     depends_on:
       - service-registry
       - mysql-service
