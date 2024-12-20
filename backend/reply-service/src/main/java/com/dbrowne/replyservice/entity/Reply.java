@@ -30,4 +30,5 @@ public class Reply {
 
     private LocalDateTime timestamp;
     private Long likeCount;
+
 }

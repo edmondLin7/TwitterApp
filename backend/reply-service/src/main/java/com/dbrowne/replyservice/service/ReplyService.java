@@ -29,11 +29,17 @@ public class ReplyService {
     @Autowired
     private AuthService authService;
 
+    public ReplyService(ReplyRepository replyRepository, TweetService tweetService, AuthService authService) {
+        this.replyRepository = replyRepository;
+        this.tweetService = tweetService;
+        this.authService = authService;
+    }
     // need to handle errors
     public List<ReplyData> getAllRepliesByTweet(String username, Long tweetId) {
         // Retrieve all replies associated with the given tweetId
         List<Reply> replyList = replyRepository.findAllByTweetId(tweetId);
         return replyList.stream()
+                .filter(Objects::nonNull)  // Filter out any null replies
                 .map(this::buildReplyDataFromReply)
                 .filter(Objects::nonNull)
                 .toList();
@@ -83,7 +89,7 @@ public class ReplyService {
         reply.setLikeCount(reply.getLikeCount() + 1);
         return replyRepository.save(reply);
     }
-    private ReplyData buildReplyDataFromReply(Reply reply) {
+    public ReplyData buildReplyDataFromReply(Reply reply) {
         ResponseEntity<User> user;
         ResponseEntity<Tweet> tweet;
         try {
@@ -113,8 +119,5 @@ public class ReplyService {
                 .user(user.getBody())
                 .build();
     }
-
-
-
 }
 

@@ -3,6 +3,7 @@ package com.dbrowne.twitter.auth.service.config;
 
 import com.dbrowne.twitter.auth.service.security.JwtAuthenticationEntryPoint;
 import com.dbrowne.twitter.auth.service.security.JwtAuthenticationFilter;
+import com.dbrowne.twitter.auth.service.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +39,7 @@ public class SecurityConfig {
                 ).exceptionHandling(ex -> ex.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
+
         http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
@@ -51,4 +53,5 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
+
 }

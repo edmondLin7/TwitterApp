@@ -12,4 +12,9 @@ public class LoginResponse {
     private boolean error;
     private String message;
     private String token;
+
+    public LoginResponse(boolean error, String message) {
+        this.error = error;
+        this.message = message;
+    }
 }

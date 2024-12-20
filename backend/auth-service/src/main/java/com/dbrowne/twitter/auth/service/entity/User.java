@@ -33,5 +33,9 @@ public class User {
 
     @Column(nullable = false)
     private String contactNumber;
+
+    public User(String user) {
+        this.username = user;
+    }
 }
 

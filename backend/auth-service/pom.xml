@@ -45,7 +45,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<!--	Copied from old full stack project, ensure all are necessary after implementation	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
