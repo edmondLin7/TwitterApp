@@ -11,6 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { authGuardGuard } from './guard/auth-guard.guard';
 import { OneTweetInfoComponent } from './components/one-tweet-info/one-tweet-info.component';
+import { SearchResultsComponent } from './pages/search-results/search-results.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'users', component: UserListComponent, canActivate: [authGuardGuard]},
   { path: 'tweetinfo', component:  OneTweetInfoComponent},
+  { path: 'searchResult/:tag', component: SearchResultsComponent},
   { path: '**', component: ErrorPageComponent },
 
 ]

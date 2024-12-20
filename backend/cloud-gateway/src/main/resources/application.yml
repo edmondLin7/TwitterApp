@@ -42,3 +42,9 @@ spring:
               args:
                 name: REPLY-SERVICE
                 fallbackuri: forward:/replyServiceFallback
+
+
+eureka:
+  client:
+    serviceURL:
+      defaultZone: http://service-registry:8761/eureka

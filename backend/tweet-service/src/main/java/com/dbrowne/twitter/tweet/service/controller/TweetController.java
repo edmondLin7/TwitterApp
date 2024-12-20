@@ -39,9 +39,12 @@ public class TweetController {
     @GetMapping("/user/{username}")
     public ResponseEntity<List<TweetResponse>> getAllTweetsByUser(@PathVariable("username") String username) {
         var data = tweetService.getAllTweetsByUsername(username);
-        if (data == null) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
+    @GetMapping("/tag/{tag}") ResponseEntity<List<TweetResponse>> getAllTweetsByTag(
+            @PathVariable("tag") String tag) {
+        var data = tweetService.getAllTweetsByTag(tag);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 

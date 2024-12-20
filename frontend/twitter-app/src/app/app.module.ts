@@ -24,6 +24,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { PasswordResetModalComponent } from './components/password-reset-modal/password-reset-modal.component';
 import { ReplyCreatorComponent } from './components/reply-creator/reply-creator.component';
 import { OneTweetInfoComponent } from './components/one-tweet-info/one-tweet-info.component';
+import { SearchResultsComponent } from './pages/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { OneTweetInfoComponent } from './components/one-tweet-info/one-tweet-inf
     PasswordResetModalComponent,
     ReplyCreatorComponent,
     OneTweetInfoComponent,
-    TweetComponent
+    TweetComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,

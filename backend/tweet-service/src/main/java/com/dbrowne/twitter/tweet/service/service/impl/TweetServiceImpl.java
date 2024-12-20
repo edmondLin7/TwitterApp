@@ -58,8 +58,16 @@ public class TweetServiceImpl implements TweetService {
         }
         List<Tweet> tweets = tweetRepository.findAllByUserId(user.getBody().getUserId());
         return tweets.stream()
-                .map(this::buildTweetResponseFromTweet
-                ).filter(Objects::nonNull)
+                .map(this::buildTweetResponseFromTweet)
+                .filter(Objects::nonNull)
+                .toList();
+    }
+
+    public List<TweetResponse> getAllTweetsByTag(String tag) {
+        List<Tweet> tweets = tweetRepository.findAllByTagContains(tag);
+        return tweets.stream()
+                .map(this::buildTweetResponseFromTweet)
+                .filter(Objects::nonNull)
                 .toList();
     }
 
@@ -147,7 +155,7 @@ public class TweetServiceImpl implements TweetService {
         return (Objects.equals(tweetUserId, user.getUserId()));
     }
 
-    private TweetResponse buildTweetResponseFromTweet(Tweet tweet) {
+    protected TweetResponse buildTweetResponseFromTweet(Tweet tweet) {
         ResponseEntity<User> user;
         try {
             user = userService.getUserById(tweet.getUserId());
